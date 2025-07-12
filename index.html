@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bedienungsrechner Oktober 2024</title>
+    <title>Bedienungsrechner Juli 2025</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -133,7 +133,7 @@
     <div class="container" id="mainPage">
         <h1>
             Bedienhilfe<br>
-            Oktober 2024
+            Juli 2025
         </h1>
 
         <div id="total">Gesamtbetrag: 0,00 €</div>
@@ -147,9 +147,9 @@
         <div class="grid hidden" id="foodGrid"></div>
 
         <div class="action-buttons">
-            <button class="pfand-button" onclick="returnPfand()">Pfand retour (2,00 €)</button>
+            <!-- <button class="pfand-button" onclick="returnPfand()">Pfand retour (2,00 €)</button> -->
             <button class="summary-button" onclick="showSummary()">Zusammenfassung</button>
-            <button onclick="removeLastItem()">Letzte Bestellung löschen</button> <!-- Neuer Button -->
+            <button onclick="removeLastItem()">Letzte Eingabe löschen</button> <!-- Neuer Button -->
         </div>        
             </div>
 
@@ -168,69 +168,61 @@
 
         const products = {
             drinks: [
-                { name: "Bier/Radler/Weizen",price: 4.50, pfand: 2.00,
-                    submenu: [
-                        { name: "1.0 L", additionalPrice: 5.00 },
-                        { name: "0.4 L", additionalPrice: 0.00 }
-                    ]
-                },
-                { name: "Spezi", price: 3.50, pfand: 2.00 },
-                { name: "Apfelschorle", price: 3.50, pfand: 2.00 },
-                { name: "Mineralwasser", price: 2.50, pfand: 2.00,
-                    submenu: [
-                    {name: "0.7 L", additionalPrice: 0.50 },
-                    {name: "0.5 L", additionalPrice: 0.00 }
-                    ]
-                },
-                { name: "Cola", price: 3.00, pfand: 2.00 },
-                { name: "Fanta", price: 3.00, pfand: 2.00 },
-                { name: "Weinschorle", price: 3.50, pfand: 2.00,
-                    submenu: [
-                    { name: "1.0 L", additionalPrice: 6.50 },
-                    { name: "0.4 L", additionalPrice: 1.50 },
-                    { name: "0.25L", additionalPrice: 0.00 }
-                    ]
-                },
+                { name: "Kleiner Mönch 0.33l",price: 3.00                                  ,pfand: 0.00},
+                { name: "Alpi Radler 0.33l",  price: 3.00                                  ,pfand: 0.00},
+                
+                { name: "Weinschorle", price: 3.00                                  ,pfand: 0.00},
+                { name: "Weißwein Glas 0.25l", price: 3.50                                  ,pfand: 0.00},
+                { name: "Rotwein Glas 0.25l", price: 3.50                                  ,pfand: 0.00},
+                { name: "Weißwein Flasche 1.00l", price: 13.00                                  ,pfand: 0.00},
+                { name: "Rotwein Flasche 1.00l", price: 13.00                                  ,pfand: 0.00},
+                
+                { name: "Sommerschorle", price: 6.00                                  ,pfand: 0.00},
+                { name: "Aperol", price: 6.00                                  ,pfand: 0.00},
 
-                { name: "Müller Thurgau", price: 4.00, pfand: 2.00,
-                    submenu: [
-                        {name: "1.0 L", additionalPrice: 7.00},
-                        {name: "0.25 L", additionalPrice: 0.00}
-                    ]
-                },
-                { name: "Spätburgunder Rotwein", price: 4.50, pfand: 2.00,
-                    submenu: [
-                        {name: "1.0 L", additionalPrice: 7.50},
-                        {name: "0.25 L", additionalPrice: 0.00}
-                    ]
-                },
-                { name: "Misch- und Bargetränke", price: 6.00, pfand: 2.00}
-                 
+                { name: "Cola", price: 3.00                                  ,pfand: 0.00},
+                { name: "Fanta", price: 3.00                                  ,pfand: 0.00},
+                { name: "Johannisbeerschorle", price: 3.50                                  ,pfand: 0.00},
+                { name: "Apfelschorle", price: 3.50                                  ,pfand: 0.00},
+                { name: "Sprudel", price: 2.50                                  ,pfand: 0.00},
+                { name: "Topfit", price: 3.50                                  ,pfand: 0.00},
+
             ],
-            food: [
-                { name: "Belegter Weck", price: 3.00,
-                    submenu: [
-                        { name: "mit Wurst", additionalPrice: 0.00 },
-                        { name: "mit Käse", additionalPrice: 0.00 }  
-                    ]
-                },
-                { name: "Einfacher Weck", price: 1.00 },
-                { name: "Brezel", price: 1.50 },
-                { name: "Pommes", price: 3.00 },
-                { name: "Weißwürste mit Brezel", price: 4.50 },
-                { name: "Fleischkäse", price: 4.50,
-                    submenu: [
-                        { name: "mit Pommes", additionalPrice: 1.50},
-                        { name: "im Weck", additionalPrice: 0.00 }
-                    ]
-                },
-                { name: "Gemüsebratling", price: 4.50,
-                    submenu: [
-                        { name: "mit Pommes", additionalPrice: 1.50},
-                        { name: "im Weck", additionalPrice: 0.00 }
-                    ]
-                }
 
+
+            food: [
+                { name: "Grillwurst", price: 4.50,
+                    submenu: [
+                        { name: "mit Kartoffelsalat", additionalPrice: 2.00 },
+                        { name: "mit Weck", additionalPrice: 0.00 }
+                    ]
+                },
+                { name: "Currywurst mit Weck", price: 1.00 },
+                { name: "Putensteak", price: 6.50,
+                    submenu: [
+                        { name: "mit Kartoffelsalat", additionalPrice: 2.00},
+                        { name: "im Weck", additionalPrice: 0.00 }
+                    ]
+                },
+                { name: "Schweinesteak", price: 6.50,
+                    submenu: [
+                        { name: "mit Kartoffelsalat", additionalPrice: 2.00},
+                        { name: "im Weck", additionalPrice: 0.00 }
+                    ]
+                },
+                { name: "Gemüseküchele", price: 4.50,
+                    submenu: [
+                        { name: "mit Kartoffelsalat", additionalPrice: 2.00},
+                        { name: "im Weck", additionalPrice: 0.00 }
+                    ]
+                },
+                { name: "Wurst-/Käseweck", price: 3.50 },
+
+                { name: "Sauerbraten mit Nudeln", price: 15.50 },
+
+                { name: "Eis", price: 1.50},
+                { name: "Eiskaffee", price: 6.00},
+                { name: "Eisschoki", price: 6.00}
             ]
         };
 
@@ -240,7 +232,8 @@
 
             products.drinks.forEach(drink => {
                 const button = document.createElement('button');
-                button.innerText = `${drink.name} (${drink.price.toFixed(2)} € + ${drink.pfand.toFixed(2)} € Pfand)`;
+                // button.innerText = `${drink.name} (${drink.price.toFixed(2)} € + ${drink.pfand.toFixed(2)} € Pfand)`;
+                button.innerText = `${drink.name} (${drink.price.toFixed(2)} €)`;
                 button.onclick = () => {
                     if (drink.submenu) {
                         showSubmenu(drink.name, drink.submenu, drink.price, drink.pfand);
@@ -274,7 +267,8 @@
             submenuOptions.forEach(option => {
                 const endPrice = basePrice + option.additionalPrice;
                 const submenuButton = document.createElement('button');
-                submenuButton.innerText = `${option.name} (${endPrice.toFixed(2)} € + ${pfand.toFixed(2)} € Pfand)`;
+                // submenuButton.innerText = `${option.name} (${endPrice.toFixed(2)} € + ${pfand.toFixed(2)} € Pfand)`;
+                submenuButton.innerText = `${option.name} (${endPrice.toFixed(2)} €)`;
                 submenuButton.onclick = () => {
                     addItem(`${productName} ${option.name}`, endPrice, pfand);
                     closeSubmenu();  // Schließt das Untermenü nach Auswahl
