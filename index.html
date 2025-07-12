@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedienungsrechner Oktober 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-height: 90%;
+            max-width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        #total {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .tab-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+        }
+        .tab {
+            cursor: pointer;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #54a6ff;
+            color: white;
+            border-radius: 8px;
+            border: none;
+            transition: background-color 0.3s;
+            flex: 1;
+        }
+        .tab:hover {
+            background-color: #0056b3;
+        }
+        .tab.active {
+            background-color: #003771;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 5px;
+        }
+        button {
+            padding: 12px;
+            font-size: 16px;
+            /* font-weight: bold; */
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        .action-buttons button {
+            flex: 1;
+        }
+        .pfand-button {
+            background-color: #ffc107;
+            font-weight: bold;
+        }
+        .pfand-button:hover {
+            background-color: #e0a800;
+        }
+        .summary-button {
+            background-color: #28a745;
+            font-weight: bold;
+        }
+        .summary-button:hover {
+            background-color: #218838;
+        }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 5;
+        }
+        .submenu {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay" onclick="closeSubmenu()"></div>
+
+    <div class="container" id="mainPage">
+        <h1>
+            Bedienhilfe<br>
+            Oktober 2025
+        </h1>
+
+        <div id="total">Gesamtbetrag: 0,00 €</div>
+
+        <div class="tab-container">
+            <div class="tab active" id="drinksTab" onclick="showTab('drinks')">Getränke</div>
+            <div class="tab" id="foodTab" onclick="showTab('food')">Essen</div>
+        </div>
+
+        <div class="grid" id="drinksGrid"></div>
+        <div class="grid hidden" id="foodGrid"></div>
+
+        <div class="action-buttons">
+            <button class="pfand-button" onclick="returnPfand()">Pfand retour (2,00 €)</button>
+            <button class="summary-button" onclick="showSummary()">Zusammenfassung</button>
+            <button onclick="removeLastItem()">Letzte Bestellung löschen</button> <!-- Neuer Button -->
+        </div>        
+            </div>
+
+    <div class="container hidden" id="summaryPage">
+        <h1>Bestellungszusammenfassung</h1>
+        <div id="orderSummary"></div>
+        <div class="action-buttons">
+            <button onclick="backToOrder()">Zurück zur Bestellung</button>
+            <button onclick="resetOrder()">Bestellung löschen und neue beginnen</button>
+        </div>
+    </div>
+
+    <script>
+        let total = 0;
+        let order = {};
+
+        const products = {
+            drinks: [
+                { name: "Bier/Radler/Weizen",price: 4.50, pfand: 2.00,
+                    submenu: [
+                        { name: "1.0 L", additionalPrice: 5.00 },
+                        { name: "0.4 L", additionalPrice: 0.00 }
+                    ]
+                },
+                { name: "Spezi", price: 3.50, pfand: 2.00 },
+                { name: "Apfelschorle", price: 3.50, pfand: 2.00 },
+                { name: "Mineralwasser", price: 2.50, pfand: 2.00,
+                    submenu: [
+                    {name: "0.7 L", additionalPrice: 0.50 },
+                    {name: "0.5 L", additionalPrice: 0.00 }
+                    ]
+                },
+                { name: "Cola", price: 3.00, pfand: 2.00 },
+                { name: "Fanta", price: 3.00, pfand: 2.00 },
+                { name: "Weinschorle", price: 3.50, pfand: 2.00,
+                    submenu: [
+                    { name: "1.0 L", additionalPrice: 6.50 },
+                    { name: "0.4 L", additionalPrice: 1.50 },
+                    { name: "0.25L", additionalPrice: 0.00 }
+                    ]
+                },
+
+                { name: "Müller Thurgau", price: 4.00, pfand: 2.00,
+                    submenu: [
+                        {name: "1.0 L", additionalPrice: 7.00},
+                        {name: "0.25 L", additionalPrice: 0.00}
+                    ]
+                },
+                { name: "Spätburgunder Rotwein", price: 4.50, pfand: 2.00,
+                    submenu: [
+                        {name: "1.0 L", additionalPrice: 7.50},
+                        {name: "0.25 L", additionalPrice: 0.00}
+                    ]
+                },
+                { name: "Misch- und Bargetränke", price: 6.00, pfand: 2.00}
+                 
+            ],
+            food: [
+                { name: "Belegter Weck", price: 3.00,
+                    submenu: [
+                        { name: "mit Wurst", additionalPrice: 0.00 },
+                        { name: "mit Käse", additionalPrice: 0.00 }  
+                    ]
+                },
+                { name: "Einfacher Weck", price: 1.00 },
+                { name: "Brezel", price: 1.50 },
+                { name: "Pommes", price: 3.00 },
+                { name: "Weißwürste mit Brezel", price: 4.50 },
+                { name: "Fleischkäse", price: 4.50,
+                    submenu: [
+                        { name: "mit Pommes", additionalPrice: 1.50},
+                        { name: "im Weck", additionalPrice: 0.00 }
+                    ]
+                },
+                { name: "Gemüsebratling", price: 4.50,
+                    submenu: [
+                        { name: "mit Pommes", additionalPrice: 1.50},
+                        { name: "im Weck", additionalPrice: 0.00 }
+                    ]
+                }
+
+            ]
+        };
+
+        function createProductButtons() {
+            const drinksGrid = document.getElementById('drinksGrid');
+            const foodGrid = document.getElementById('foodGrid');
+
+            products.drinks.forEach(drink => {
+                const button = document.createElement('button');
+                button.innerText = `${drink.name} (${drink.price.toFixed(2)} € + ${drink.pfand.toFixed(2)} € Pfand)`;
+                button.onclick = () => {
+                    if (drink.submenu) {
+                        showSubmenu(drink.name, drink.submenu, drink.price, drink.pfand);
+                    } else {
+                        addItem(drink.name, drink.price, drink.pfand);
+                    }
+                };
+                drinksGrid.appendChild(button);
+            });
+
+            products.food.forEach(food => {
+                const button = document.createElement('button');
+                button.innerText = `${food.name} (${food.price.toFixed(2)} €)`;
+                button.onclick = () => {
+                    if (food.submenu) {
+                        showSubmenu(food.name, food.submenu, food.price);
+                    } else {
+                        addItem(food.name, food.price);
+                    }
+                };
+                foodGrid.appendChild(button);
+            });
+        }
+
+        function showSubmenu(productName, submenuOptions, basePrice, pfand = 0) {
+            closeSubmenu();  // Schließt andere geöffnete Untermenüs
+            const overlay = document.getElementById('overlay');
+            const submenuDiv = document.createElement('div');
+            submenuDiv.className = 'submenu';
+
+            submenuOptions.forEach(option => {
+                const endPrice = basePrice + option.additionalPrice;
+                const submenuButton = document.createElement('button');
+                submenuButton.innerText = `${option.name} (${endPrice.toFixed(2)} € + ${pfand.toFixed(2)} € Pfand)`;
+                submenuButton.onclick = () => {
+                    addItem(`${productName} ${option.name}`, endPrice, pfand);
+                    closeSubmenu();  // Schließt das Untermenü nach Auswahl
+                };
+                submenuDiv.appendChild(submenuButton);
+            });
+
+            document.body.appendChild(submenuDiv);
+            overlay.style.display = 'block';
+        }
+
+        function closeSubmenu() {
+            const submenus = document.querySelectorAll('.submenu');
+            submenus.forEach(submenu => submenu.remove());
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        let lastAddedItem = null;  // Variable zum Speichern des letzten hinzugefügten Produkts
+
+        function addItem(itemName, itemPrice, pfandAmount = 0) {
+            total += itemPrice + pfandAmount;
+
+            if (order[itemName]) {
+                order[itemName].count += 1;
+                order[itemName].total += itemPrice + pfandAmount;
+            } else {
+                order[itemName] = {
+                    count: 1,
+                    total: itemPrice + pfandAmount
+                };
+            }
+
+            lastAddedItem = { name: itemName, price: itemPrice + pfandAmount };  // Speichere das letzte hinzugefügte Produkt
+            updateTotal();
+        }
+
+        function removeLastItem() {
+            if (lastAddedItem && order[lastAddedItem.name]) {
+                const item = order[lastAddedItem.name];
+
+                total -= lastAddedItem.price;  // Subtrahiere den Preis des letzten hinzugefügten Produkts
+
+                if (item.count > 1) {
+                    item.count -= 1;
+                    item.total -= lastAddedItem.price;
+                } else {
+                    delete order[lastAddedItem.name];
+                }
+
+                lastAddedItem = null;  // Setze die Variable zurück, nachdem das letzte Element gelöscht wurde
+                updateTotal();
+            } else {
+                alert('Es gibt keine Bestellung, die gelöscht werden kann.');
+            }
+        }
+
+        function returnPfand() {
+            const pfandAmount = 2.00;
+            total -= pfandAmount;
+
+            if (order['Pfand retour']) {
+                order['Pfand retour'].count += 1;
+                order['Pfand retour'].total -= pfandAmount;
+            } else {
+                order['Pfand retour'] = {
+                    count: 1,
+                    total: -pfandAmount
+                };
+            }
+            updateTotal();
+        }
+
+        function updateTotal() {
+            document.getElementById('total').innerText = `Gesamtbetrag: ${total.toFixed(2)} €`;
+        }
+
+        function clearOrder() {
+            total = 0;
+            order = {};
+            updateTotal();
+        }
+
+        function showSummary() {
+            document.getElementById('mainPage').classList.add('hidden');
+            document.getElementById('summaryPage').classList.remove('hidden');
+
+            let summaryHTML = '';
+            for (const item in order) {
+                summaryHTML += `${item} x ${order[item].count}: ${order[item].total.toFixed(2)} €<br>`;
+            }
+            summaryHTML += `<strong>Gesamtbetrag: ${total.toFixed(2)} €</strong>`;
+            document.getElementById('orderSummary').innerHTML = summaryHTML;
+        }
+
+        function backToOrder() {
+            document.getElementById('summaryPage').classList.add('hidden');
+            document.getElementById('mainPage').classList.remove('hidden');
+            closeSubmenu();  // Schließt eventuell geöffnete Untermenüs
+        }
+
+        function resetOrder() {
+            clearOrder();
+            backToOrder();
+        }
+
+        function showTab(tabName) {
+            document.getElementById('drinksGrid').classList.add('hidden');
+            document.getElementById('foodGrid').classList.add('hidden');
+            document.getElementById('drinksTab').classList.remove('active');
+            document.getElementById('foodTab').classList.remove('active');
+
+            if (tabName === 'drinks') {
+                document.getElementById('drinksGrid').classList.remove('hidden');
+                document.getElementById('drinksTab').classList.add('active');
+            } else if (tabName === 'food') {
+                document.getElementById('foodGrid').classList.remove('hidden');
+                document.getElementById('foodTab').classList.add('active');
+            }
+        }
+
+        // Dynamische Buttons erstellen
+        createProductButtons();
+        showTab('drinks');  // Startet mit dem Tab "Getränke"
+    </script>
+</body>
+</html>
