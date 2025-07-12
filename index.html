@@ -168,24 +168,30 @@
 
         const products = {
             drinks: [
-                { name: "Kleiner Mönch 0.33l",price: 3.00                                  ,pfand: 0.00},
-                { name: "Alpi Radler 0.33l",  price: 3.00                                  ,pfand: 0.00},
+                { name: "Bier",price: 3.00                                      ,pfand: 0.00},
+                { name: "Radler",  price: 3.00                                  ,pfand: 0.00},
                 
-                { name: "Weinschorle", price: 3.00                                  ,pfand: 0.00},
-                { name: "Weißwein Glas 0.25l", price: 3.50                                  ,pfand: 0.00},
-                { name: "Rotwein Glas 0.25l", price: 3.50                                  ,pfand: 0.00},
-                { name: "Weißwein Flasche 1.00l", price: 13.00                                  ,pfand: 0.00},
-                { name: "Rotwein Flasche 1.00l", price: 13.00                                  ,pfand: 0.00},
-                
-                { name: "Sommerschorle", price: 6.00                                  ,pfand: 0.00},
-                { name: "Aperol", price: 6.00                                  ,pfand: 0.00},
+                { name: "Weinschorle", price: 3.00                              ,pfand: 0.00},
+                { name: "Weißwein", price: 3.50,
+                submenu: [
+                    { name: "Flasche 1.0l", additionalPrice: 9.50},
+                    { name: "Glas 0.25l", additionalPrice: 0.00}
+                ]                                                               ,pfand: 0.00},
+                { name: "Rotwein", price: 3.50,
+                submenu: [
+                    { name: "Flasche 1.0l", additionalPrice: 9.50},
+                    { name: "Glas 0.25l", additionalPrice: 0.00}
+                ]                                                               ,pfand: 0.00},
 
-                { name: "Cola", price: 3.00                                  ,pfand: 0.00},
-                { name: "Fanta", price: 3.00                                  ,pfand: 0.00},
-                { name: "Johannisbeerschorle", price: 3.50                                  ,pfand: 0.00},
-                { name: "Apfelschorle", price: 3.50                                  ,pfand: 0.00},
+                { name: "Sommerschorle", price: 6.00                            ,pfand: 0.00},
+                { name: "Aperol", price: 6.00                                   ,pfand: 0.00},
+
+                { name: "Cola", price: 3.00                                     ,pfand: 0.00},
+                { name: "Fanta", price: 3.00                                    ,pfand: 0.00},
+                { name: "Johannisbeerschorle", price: 3.50                      ,pfand: 0.00},
+                { name: "Apfelschorle", price: 3.50                             ,pfand: 0.00},
                 { name: "Sprudel", price: 2.50                                  ,pfand: 0.00},
-                { name: "Topfit", price: 3.50                                  ,pfand: 0.00},
+                { name: "Topfit", price: 3.50                                   ,pfand: 0.00},
 
             ],
 
