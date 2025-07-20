@@ -15,7 +15,7 @@
             { "name": "Glas 0.25l", "additionalPrice": 0.00}
         ]                                                               ,"pfand": 0.00},
 
-        { "name": "Sommerschorle", "price": 6.00                            ,"pfand": 0.00},
+        { "name": "Sommer-schorle", "price": 6.00                            ,"pfand": 0.00},
         { "name": "Aperol", "price": 6.00                                   ,"pfand": 0.00},
 
         { "name": "Cola", "price": 3.00                                     ,"pfand": 0.00},
@@ -47,13 +47,13 @@
                 { "name": "im Weck", "additionalPrice": 0.00 }
             ]
         },
-        { "name": "Gemüseküchele", "price": 4.50,
+        { "name": "Gemüse-küchele", "price": 4.50,
             "submenu": [
                 { "name": "mit Kartoffelsalat", "additionalPrice": 2.00},
                 { "name": "im Weck", "additionalPrice": 0.00 }
             ]
         },
-        { "name": "Wurst-/Käseweck", "price": 3.50 },
+        { "name": "Wurst-/Käse-weck", "price": 3.50 },
 
         { "name": "Sauerbraten mit Nudeln", "price": 15.50 },
 
