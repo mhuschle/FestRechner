@@ -1,12 +1,32 @@
+let pfand = 0;
 let total = 0;
 let order = {};
 
+async function loadConfig() {
+    const response = await fetch('data/config.json');
+    if (!response.ok) {
+        throw new Error('Could not import config.');
+    }
+    const settings = await response.json();
+    return settings;
+}
+
+loadConfig().then(settings => {
+    document.title = settings.appName + " "+ settings.version;
+    document.getElementById('titleName').textContent = settings.appName;
+    document.getElementById('titleVersion').textContent = settings.version;
+}).catch(err => {
+    console.error(err);
+});
+
 async function loadProducts() {
     const response = await fetch('data/products.json');
+    if (!response.ok) {
+        throw new Error('Could not import config.');
+    }
     const products = await response.json();
     return products;
 }
-
 
 function createProductButtons() {
     const drinksGrid = document.getElementById('drinksGrid');

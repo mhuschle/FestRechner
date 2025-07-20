@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FestRechner Juli 2025</title>
+    <title>FestRechner</title>
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
     <div class="overlay" id="overlay" onclick="closeSubmenu()"></div>
 
-    <h1>FestRechner</h1>
-    <h2>Juli 2025</h2>
+    <h1 id="titleName"> FestRechner</h1>
+    <h2 id="titleVersion">no version specified</h2>
 
     <div class="container" id="mainPage">
 
@@ -20,7 +20,7 @@
         <div class="tab-container">
             <div class="tab active" id="drinksTab" onclick="showTab('drinks')">Getränke</div>
             <div class="tab" id="foodTab" onclick="showTab('food')">Essen</div>
-        </div>
+                    </div>
 
         <div class="grid" id="drinksGrid"></div>
         <div class="grid hidden" id="foodGrid"></div>
