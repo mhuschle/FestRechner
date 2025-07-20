@@ -14,7 +14,7 @@
 
     <div class="container" id="mainPage">
 
-        <div id="total">Gesamtbetrag: 0,00 €</div>
+        <div id="totalSum">Gesamtbetrag: 0.00 €</div>
 
         <div class="tab-container">
             <div class="tab active" id="drinksTab" onclick="showTab('drinks')">Getränke</div>
@@ -25,14 +25,14 @@
         <div class="grid hidden" id="foodGrid"></div>
 
         <div class="action-buttons">
-            <button class="pfand-button" onclick="returnPfand()">Pfand retour (2,00 €)</button>
-            <button class="summary-button" onclick="showSummary()">Zusammen-<br>fassung</button>
-            <button class="delete-button"  onclick="removeLastItem()">Letzte Eingabe löschen</button>
+            <button class="pfand-button" id="pfandButton" onclick="returnPfand()">Pfand zurück</button>
+            <button class="summary-button" id="summaryButton" onclick="showSummary()">Zusammen-<br>fassung</button>
+            <button class="delete-button"  id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
         </div>        
     </div>
 
     <div class="container hidden" id="summaryPage">
-        <h1>Bestellungszusammenfassung</h1>
+        <h1>Bestellungs-zusammenfassung</h1>
         <div id="orderSummary"></div>
         <div class="action-buttons">
             <button onclick="backToOrder()">Zurück zur Bestellung</button>

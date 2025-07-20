@@ -1,4 +1,4 @@
-let pfand = 0;
+let pfandAmount = 0.00;
 let total = 0;
 let order = {};
 
@@ -16,6 +16,10 @@ loadConfig().then(settings => {
     document.getElementById('header').innerHTML = `
     <span style="font-weight: bold; font-size: 25px;">${settings.appName}</span>
     <span style="font-weight: normal; font-size: 18px;"> - ${settings.version}</span>
+    `;
+    pfandAmount = parseFloat(settings.pfand)
+    document.getElementById('pfandButton').innerHTML = `
+    Pfand zurück \n(${pfandAmount.toFixed(2)} €)
     `;
 }).catch(err => {
     console.error(err);
@@ -96,7 +100,7 @@ function closeSubmenu() {
 
 let lastAddedItem = null;  // Variable zum Speichern des letzten hinzugefügten Produkts
 
-function addItem(itemName, itemPrice, pfandAmount = 0) {
+function addItem(itemName, itemPrice) {
     total += itemPrice + pfandAmount;
 
     if (order[itemName]) {
@@ -134,7 +138,6 @@ function removeLastItem() {
 }
 
 function returnPfand() {
-    const pfandAmount = 2.00;
     total -= pfandAmount;
 
     if (order['Pfand retour']) {
@@ -150,7 +153,7 @@ function returnPfand() {
 }
 
 function updateTotal() {
-    document.getElementById('total').innerText = `Gesamtbetrag: ${total.toFixed(2)} €`;
+    document.getElementById('totalSum').innerText = `Gesamtbetrag: ${total.toFixed(2)} €`;
 }
 
 function clearOrder() {
