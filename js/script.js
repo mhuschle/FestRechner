@@ -13,8 +13,10 @@ async function loadConfig() {
 
 loadConfig().then(settings => {
     document.title = settings.appName + " "+ settings.version;
-    document.getElementById('titleName').textContent = settings.appName;
-    document.getElementById('titleVersion').textContent = settings.version;
+    document.getElementById('header').innerHTML = `
+    <span style="font-weight: bold; font-size: 25px;">${settings.appName}</span>
+    <span style="font-weight: normal; font-size: 18px;"> - ${settings.version}</span>
+    `;
 }).catch(err => {
     console.error(err);
 });

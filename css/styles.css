@@ -8,13 +8,9 @@ body {
 }
 h1 {
     font-size: 25px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     color: #101e1d;
-}
-h2 {
-    font-size: 15px;
-    margin-bottom: 10px;
-    color: #101e1d;
+    vertical-align: middle;
 }
 
 .container {
@@ -86,7 +82,7 @@ button {
     margin-top: 15px;
     gap: 5px;
 }
-@media (min-width: 350px) {
+@media (min-width: 300px) {
     .action-buttons {
         flex-direction: row;
     }
