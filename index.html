@@ -3,21 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bedienungsrechner Juli 2025</title>
+    <title>FestRechner Juli 2025</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 10px;
-            background-color: #f5f5f5;
+            padding: 8px;
+            background-color: #d4e7e4;
             box-sizing: border-box;
-        }
-        .container {
             text-align: center;
+        }
+        h1 {
+            font-size: 25px;
+            margin-bottom: 5px;
+            color: #101e1d;
+        }
+        h2 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #101e1d;
+        }
+
+        .container {
             padding: 10px;
             border-radius: 10px;
             background-color: #ffffff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px #003435;
             max-height: 90%;
             max-width: 100%;
             margin: 0 auto;
@@ -27,6 +38,7 @@
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 15px;
+            color: #153633;
         }
         .tab-container {
             display: flex;
@@ -38,7 +50,7 @@
             padding: 10px;
             font-size: 16px;
             font-weight: bold;
-            background-color: #54a6ff;
+            background-color: #509f98;
             color: white;
             border-radius: 8px;
             border: none;
@@ -46,30 +58,30 @@
             flex: 1;
         }
         .tab:hover {
-            background-color: #0056b3;
+            background-color: #153633;
         }
         .tab.active {
-            background-color: #003771;
+            background-color: #16504c;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 5px;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 3px;
         }
         button {
-            padding: 12px;
+            padding: 10px;
             font-size: 16px;
-            /* font-weight: bold; */
+            font-weight: bold;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
             border: none;
-            background-color: #007bff;
-            color: white;
+            background-color: #509f997f;
+            color: black;
             width: 100%;
             box-sizing: border-box;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #16504c;
         }
         .action-buttons {
             display: flex;
@@ -81,22 +93,25 @@
             flex: 1;
         }
         .pfand-button {
-            background-color: #ffc107;
+            background-color: #634686c3;
             font-weight: bold;
         }
         .pfand-button:hover {
-            background-color: #e0a800;
+            background-color: #3D0087;
         }
         .summary-button {
-            background-color: #28a745;
+            background-color: #6d8a4dde;
             font-weight: bold;
         }
         .summary-button:hover {
-            background-color: #218838;
+            background-color: #4A8700;
         }
-        h1 {
-            font-size: 20px;
-            margin-bottom: 15px;
+        .delete-button {
+            background-color: #953d41c2;
+            font-weight: bold;
+        }
+        .delete-button:hover {
+            background-color: #870007;
         }
         .hidden {
             display: none;
@@ -130,11 +145,10 @@
 <body>
     <div class="overlay" id="overlay" onclick="closeSubmenu()"></div>
 
+    <h1>FestRechner</h1>
+    <h2>Juli 2025</h2>
+
     <div class="container" id="mainPage">
-        <h1>
-            Bedienhilfe<br>
-            Juli 2025
-        </h1>
 
         <div id="total">Gesamtbetrag: 0,00 €</div>
 
@@ -147,11 +161,11 @@
         <div class="grid hidden" id="foodGrid"></div>
 
         <div class="action-buttons">
-            <!-- <button class="pfand-button" onclick="returnPfand()">Pfand retour (2,00 €)</button> -->
+            <button class="pfand-button" onclick="returnPfand()">Pfand retour (2,00 €)</button>
             <button class="summary-button" onclick="showSummary()">Zusammenfassung</button>
-            <button onclick="removeLastItem()">Letzte Eingabe löschen</button> <!-- Neuer Button -->
+            <button class="delete-button"  onclick="removeLastItem()">Letzte Eingabe löschen</button>
         </div>        
-            </div>
+    </div>
 
     <div class="container hidden" id="summaryPage">
         <h1>Bestellungszusammenfassung</h1>
@@ -166,71 +180,9 @@
         let total = 0;
         let order = {};
 
-        const products = {
-            drinks: [
-                { name: "Bier",price: 3.00                                      ,pfand: 0.00},
-                { name: "Radler",  price: 3.00                                  ,pfand: 0.00},
-                
-                { name: "Weinschorle", price: 3.00                              ,pfand: 0.00},
-                { name: "Weißwein", price: 3.50,
-                submenu: [
-                    { name: "Flasche 1.0l", additionalPrice: 9.50},
-                    { name: "Glas 0.25l", additionalPrice: 0.00}
-                ]                                                               ,pfand: 0.00},
-                { name: "Rotwein", price: 3.50,
-                submenu: [
-                    { name: "Flasche 1.0l", additionalPrice: 9.50},
-                    { name: "Glas 0.25l", additionalPrice: 0.00}
-                ]                                                               ,pfand: 0.00},
+        const response = await fetch('products.json');
+        const products = await response.json();
 
-                { name: "Sommerschorle", price: 6.00                            ,pfand: 0.00},
-                { name: "Aperol", price: 6.00                                   ,pfand: 0.00},
-
-                { name: "Cola", price: 3.00                                     ,pfand: 0.00},
-                { name: "Fanta", price: 3.00                                    ,pfand: 0.00},
-                { name: "Johannisbeerschorle", price: 3.50                      ,pfand: 0.00},
-                { name: "Apfelschorle", price: 3.50                             ,pfand: 0.00},
-                { name: "Sprudel", price: 2.50                                  ,pfand: 0.00},
-                { name: "Topfit", price: 3.50                                   ,pfand: 0.00},
-
-            ],
-
-
-            food: [
-                { name: "Grillwurst", price: 4.50,
-                    submenu: [
-                        { name: "mit Kartoffelsalat", additionalPrice: 2.00 },
-                        { name: "mit Weck", additionalPrice: 0.00 }
-                    ]
-                },
-                { name: "Currywurst mit Weck", price: 4.50 },
-                { name: "Putensteak", price: 6.50,
-                    submenu: [
-                        { name: "mit Kartoffelsalat", additionalPrice: 2.00},
-                        { name: "im Weck", additionalPrice: 0.00 }
-                    ]
-                },
-                { name: "Schweinesteak", price: 6.50,
-                    submenu: [
-                        { name: "mit Kartoffelsalat", additionalPrice: 2.00},
-                        { name: "im Weck", additionalPrice: 0.00 }
-                    ]
-                },
-                { name: "Gemüseküchele", price: 4.50,
-                    submenu: [
-                        { name: "mit Kartoffelsalat", additionalPrice: 2.00},
-                        { name: "im Weck", additionalPrice: 0.00 }
-                    ]
-                },
-                { name: "Wurst-/Käseweck", price: 3.50 },
-
-                { name: "Sauerbraten mit Nudeln", price: 15.50 },
-
-                { name: "Eis", price: 1.50},
-                { name: "Eiskaffee", price: 6.00},
-                { name: "Eisschoki", price: 6.00}
-            ]
-        };
 
         function createProductButtons() {
             const drinksGrid = document.getElementById('drinksGrid');
@@ -239,7 +191,7 @@
             products.drinks.forEach(drink => {
                 const button = document.createElement('button');
                 // button.innerText = `${drink.name} (${drink.price.toFixed(2)} € + ${drink.pfand.toFixed(2)} € Pfand)`;
-                button.innerText = `${drink.name} (${drink.price.toFixed(2)} €)`;
+                button.innerText = `${drink.name} \n(${drink.price.toFixed(2)} €)`;
                 button.onclick = () => {
                     if (drink.submenu) {
                         showSubmenu(drink.name, drink.submenu, drink.price, drink.pfand);
@@ -274,7 +226,7 @@
                 const endPrice = basePrice + option.additionalPrice;
                 const submenuButton = document.createElement('button');
                 // submenuButton.innerText = `${option.name} (${endPrice.toFixed(2)} € + ${pfand.toFixed(2)} € Pfand)`;
-                submenuButton.innerText = `${option.name} (${endPrice.toFixed(2)} €)`;
+                submenuButton.innerText = `${option.name} \n(${endPrice.toFixed(2)} €)`;
                 submenuButton.onclick = () => {
                     addItem(`${productName} ${option.name}`, endPrice, pfand);
                     closeSubmenu();  // Schließt das Untermenü nach Auswahl
