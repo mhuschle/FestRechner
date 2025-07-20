@@ -13,6 +13,9 @@ h1 {
     color: #101e1d;
     vertical-align: middle;
 }
+.highlight {
+    background-color: rgba(139, 139, 139, 0.455);
+}
 
 .container {
     padding: 10px;
@@ -91,30 +94,32 @@ button {
 .action-buttons button {
     flex: 1;
 }
-.pfand-button {
+.purple-button {
     background-color: #634686c3;
     font-weight: bold;
 }
 @media (hover: hover) and (pointer: fine) {
-    .pfand-button:hover {
+    .purple-button:hover {
         background-color: #3D0087;
     }
 }
-.summary-button {
+.green-button {
     background-color: #6d8a4dde;
     font-weight: bold;
+    margin-top: 5px;
+    height: 40px;
 }
 @media (hover: hover) and (pointer: fine) {
-    .summary-button:hover {
+    .green-button:hover {
         background-color: #4A8700;
     }
 }
-.delete-button {
+.red-button {
     background-color: #953d41c2;
     font-weight: bold;
 }
 @media (hover: hover) and (pointer: fine) {
-    .delete-button:hover {
+    .red-button:hover {
         background-color: #870007;
     }
 }

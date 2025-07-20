@@ -20,7 +20,7 @@ loadConfig().then(settings => {
     pfandAmount = parseFloat(settings.pfand)
     if (pfandAmount > 0) {
         document.getElementById('pfandButton').innerHTML = `
-        Pfand zurück \n(${pfandAmount.toFixed(2)} €)
+        Pfand zurück <br>(${pfandAmount.toFixed(2)} €)
         `;
     } else {
         document.getElementById('pfandButton').style.display = 'none'
@@ -61,7 +61,7 @@ function createProductButtons() {
         
             products.food.forEach(food => {
                 const button = document.createElement('button');
-                button.innerText = `${food.name} (${food.price.toFixed(2)} €)`;
+                button.innerText = `${food.name} \n(${food.price.toFixed(2)} €)`;
                 button.onclick = () => {
                     if (food.submenu) {
                         showSubmenu(food.name, food.submenu, food.price);
@@ -174,7 +174,9 @@ function showSummary() {
     for (const item in order) {
         summaryHTML += `${item} x ${order[item].count}: ${order[item].total.toFixed(2)} €<br>`;
     }
-    summaryHTML += `<strong>Gesamtbetrag: ${total.toFixed(2)} €</strong>`;
+    summaryHTML += `<br>`
+    summaryHTML += `<span style="font-size: 22px;">Gesamtbetrag: </span>
+    <span class="highlight" style="font-weight: bold; font-size: 25px;"> ${total.toFixed(2)} €</span>`;
     document.getElementById('orderSummary').innerHTML = summaryHTML;
 }
 

@@ -25,18 +25,18 @@
         <div class="grid hidden" id="foodGrid"></div>
 
         <div class="action-buttons">
-            <button class="pfand-button" id="pfandButton" onclick="returnPfand()">Pfand zurück</button>
-            <button class="summary-button" id="summaryButton" onclick="showSummary()">Zusammen-<br>fassung</button>
-            <button class="delete-button"  id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
+            <button class="purple-button" id="pfandButton" onclick="returnPfand()">Pfand zurück</button>
+            <button class="red-button"  id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
         </div>        
+        <button class="green-button" id="summaryButton" onclick="showSummary()">Zusammenfassung</button>
     </div>
 
     <div class="container hidden" id="summaryPage">
         <h1>Bestellungs-zusammenfassung</h1>
         <div id="orderSummary"></div>
         <div class="action-buttons">
-            <button onclick="backToOrder()">Zurück zur Bestellung</button>
-            <button onclick="resetOrder()">Bestellung löschen und neue beginnen</button>
+            <button class="purple-button" onclick="backToOrder()">Zurück zur Bestellung</button>
+            <button class="red-button"    onclick="resetOrder()">Bestellung zurücksetzen</button>
         </div>
     </div>
 
