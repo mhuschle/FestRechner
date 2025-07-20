@@ -73,14 +73,22 @@ button {
     width: 100%;
     box-sizing: border-box;
 }
-button:hover {
-    background-color: #16504c;
+@media (hover: hover) and (pointer: fine) {
+    button:hover {
+        background-color: #16504c;
+    }
 }
 .action-buttons {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-top: 15px;
     gap: 5px;
+}
+@media (min-width: 350px) {
+    .action-buttons {
+        flex-direction: row;
+    }
 }
 .action-buttons button {
     flex: 1;
@@ -89,22 +97,28 @@ button:hover {
     background-color: #634686c3;
     font-weight: bold;
 }
-.pfand-button:hover {
-    background-color: #3D0087;
+@media (hover: hover) and (pointer: fine) {
+    .pfand-button:hover {
+        background-color: #3D0087;
+    }
 }
 .summary-button {
     background-color: #6d8a4dde;
     font-weight: bold;
 }
-.summary-button:hover {
-    background-color: #4A8700;
+@media (hover: hover) and (pointer: fine) {
+    .summary-button:hover {
+        background-color: #4A8700;
+    }
 }
 .delete-button {
     background-color: #953d41c2;
     font-weight: bold;
 }
-.delete-button:hover {
-    background-color: #870007;
+@media (hover: hover) and (pointer: fine) {
+    .delete-button:hover {
+        background-color: #870007;
+    }
 }
 .hidden {
     display: none;
@@ -127,7 +141,7 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     background-color: white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px #003435;
     z-index: 10;
     display: flex;
     flex-direction: column;
