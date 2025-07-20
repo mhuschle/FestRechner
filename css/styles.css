@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 8px;
+    background-color: #d4e7e4;
+    box-sizing: border-box;
+    text-align: center;
+}
+h1 {
+    font-size: 25px;
+    margin-bottom: 0px;
+    color: #101e1d;
+}
+h2 {
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #101e1d;
+}
+
+.container {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px #003435;
+    max-height: 90%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+#total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #153633;
+}
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+.tab {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #509f98;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s;
+    flex: 1;
+}
+.tab:hover {
+    background-color: #153633;
+}
+.tab.active {
+    background-color: #16504c;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 3px;
+}
+button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background-color: #509f997f;
+    color: black;
+    width: 100%;
+    box-sizing: border-box;
+}
+button:hover {
+    background-color: #16504c;
+}
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 5px;
+}
+.action-buttons button {
+    flex: 1;
+}
+.pfand-button {
+    background-color: #634686c3;
+    font-weight: bold;
+}
+.pfand-button:hover {
+    background-color: #3D0087;
+}
+.summary-button {
+    background-color: #6d8a4dde;
+    font-weight: bold;
+}
+.summary-button:hover {
+    background-color: #4A8700;
+}
+.delete-button {
+    background-color: #953d41c2;
+    font-weight: bold;
+}
+.delete-button:hover {
+    background-color: #870007;
+}
+.hidden {
+    display: none;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 5;
+}
+.submenu {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
