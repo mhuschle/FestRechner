@@ -8,7 +8,8 @@ body {
 }
 h1 {
     font-size: 25px;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
     color: #101e1d;
     vertical-align: middle;
 }
@@ -24,9 +25,9 @@ h1 {
     box-sizing: border-box;
 }
 #totalSum {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #153633;
 }
 .tab-container {
@@ -126,7 +127,7 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     display: none;
     z-index: 5;
 }
@@ -143,4 +144,6 @@ button {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    height: auto;
+    width: 80%;
 }
