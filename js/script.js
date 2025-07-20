@@ -18,9 +18,13 @@ loadConfig().then(settings => {
     <span style="font-weight: normal; font-size: 18px;"> - ${settings.version}</span>
     `;
     pfandAmount = parseFloat(settings.pfand)
-    document.getElementById('pfandButton').innerHTML = `
-    Pfand zurück \n(${pfandAmount.toFixed(2)} €)
-    `;
+    if (pfandAmount > 0) {
+        document.getElementById('pfandButton').innerHTML = `
+        Pfand zurück \n(${pfandAmount.toFixed(2)} €)
+        `;
+    } else {
+        document.getElementById('pfandButton').style.display = 'none'
+    }
 }).catch(err => {
     console.error(err);
 });
@@ -98,7 +102,7 @@ function closeSubmenu() {
     document.getElementById('overlay').style.display = 'none';
 }
 
-let lastAddedItem = null;  // Variable zum Speichern des letzten hinzugefügten Produkts
+let lastAddedItem = null;  // Variable to save last added item
 
 function addItem(itemName, itemPrice) {
     total += itemPrice + pfandAmount;
@@ -113,7 +117,7 @@ function addItem(itemName, itemPrice) {
         };
     }
 
-    lastAddedItem = { name: itemName, price: itemPrice + pfandAmount };  // Speichere das letzte hinzugefügte Produkt
+    lastAddedItem = { name: itemName, price: itemPrice + pfandAmount };  // Save last added item
     updateTotal();
 }
 
@@ -121,7 +125,7 @@ function removeLastItem() {
     if (lastAddedItem && order[lastAddedItem.name]) {
         const item = order[lastAddedItem.name];
 
-        total -= lastAddedItem.price;  // Subtrahiere den Preis des letzten hinzugefügten Produkts
+        total -= lastAddedItem.price;  // Subtract price of the last added item
 
         if (item.count > 1) {
             item.count -= 1;
@@ -130,7 +134,7 @@ function removeLastItem() {
             delete order[lastAddedItem.name];
         }
 
-        lastAddedItem = null;  // Setze die Variable zurück, nachdem das letzte Element gelöscht wurde
+        lastAddedItem = null;  // Resets variable after deleting last order
         updateTotal();
     } else {
         alert('Es gibt keine Bestellung, die gelöscht werden kann.');
