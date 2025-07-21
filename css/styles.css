@@ -14,7 +14,7 @@ h1 {
     vertical-align: middle;
 }
 .highlight {
-    background-color: rgba(139, 139, 139, 0.455);
+    background-color: #a9cecaa7;
 }
 
 .container {
@@ -93,6 +93,7 @@ button {
 }
 .action-buttons button {
     flex: 1;
+    padding: 15px;
 }
 .purple-button {
     background-color: #634686c3;
@@ -107,7 +108,6 @@ button {
     background-color: #6d8a4dde;
     font-weight: bold;
     margin-top: 5px;
-    height: 40px;
 }
 @media (hover: hover) and (pointer: fine) {
     .green-button:hover {

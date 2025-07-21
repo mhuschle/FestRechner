@@ -1,6 +1,8 @@
 let pfandAmount = 0.00;
 let total = 0;
 let order = {};
+let lastAddedItem = null;  // Variable to save last added item
+updateTotal('totalSum')    // Write text with initial total=0 
 
 async function loadConfig() {
     const response = await fetch('data/config.json');
@@ -12,7 +14,7 @@ async function loadConfig() {
 }
 
 loadConfig().then(settings => {
-    document.title = settings.appName + " "+ settings.version;
+    document.title = settings.appName + " " + settings.version;
     document.getElementById('header').innerHTML = `
     <span style="font-weight: bold; font-size: 25px;">${settings.appName}</span>
     <span style="font-weight: normal; font-size: 18px;"> - ${settings.version}</span>
@@ -41,14 +43,14 @@ async function loadProducts() {
 function createProductButtons() {
     const drinksGrid = document.getElementById('drinksGrid');
     const foodGrid = document.getElementById('foodGrid');
+    const etcGrid = document.getElementById('etcGrid');
 
     loadProducts()
         .then(products => {
-        
+
             products.drinks.forEach(drink => {
                 const button = document.createElement('button');
-                // button.innerText = `${drink.name} (${drink.price.toFixed(2)} € + ${drink.pfand.toFixed(2)} € Pfand)`;
-                button.innerText = `${drink.name} \n(${drink.price.toFixed(2)} €)`;
+                button.innerText = `${drink.name} \n(${drink.price.toFixed(2)} € + ${drink.pfand.toFixed(2)} € Pfand)`;
                 button.onclick = () => {
                     if (drink.submenu) {
                         showSubmenu(drink.name, drink.submenu, drink.price, drink.pfand);
@@ -58,24 +60,37 @@ function createProductButtons() {
                 };
                 drinksGrid.appendChild(button);
             });
-        
+
             products.food.forEach(food => {
                 const button = document.createElement('button');
                 button.innerText = `${food.name} \n(${food.price.toFixed(2)} €)`;
                 button.onclick = () => {
                     if (food.submenu) {
-                        showSubmenu(food.name, food.submenu, food.price);
+                        showSubmenu(food.name, food.submenu, food.price, food.pfand);
                     } else {
                         addItem(food.name, food.price);
                     }
                 };
                 foodGrid.appendChild(button);
             });
+
+            products.etc.forEach(etc => {
+                const button = document.createElement('button');
+                button.innerText = `${etc.name} \n(${etc.price.toFixed(2)} €)`;
+                button.onclick = () => {
+                    if (etc.submenu) {
+                        showSubmenu(etc.name, etc.submenu, etc.price, etc.pfand);
+                    } else {
+                        addItem(etc.name, etc.price);
+                    }
+                };
+                etcGrid.appendChild(button);
+            });
         })
 }
 
-function showSubmenu(productName, submenuOptions, basePrice, pfand = 0) {
-    closeSubmenu();  // Schließt andere geöffnete Untermenüs
+function showSubmenu(productName, submenuOptions, basePrice, pfand) {
+    closeSubmenu();  // Closes already opened submenus
     const overlay = document.getElementById('overlay');
     const submenuDiv = document.createElement('div');
     submenuDiv.className = 'submenu';
@@ -87,7 +102,7 @@ function showSubmenu(productName, submenuOptions, basePrice, pfand = 0) {
         submenuButton.innerText = `${option.name} \n(${endPrice.toFixed(2)} €)`;
         submenuButton.onclick = () => {
             addItem(`${productName} ${option.name}`, endPrice, pfand);
-            closeSubmenu();  // Schließt das Untermenü nach Auswahl
+            closeSubmenu();  // Closes submenus after selection
         };
         submenuDiv.appendChild(submenuButton);
     });
@@ -101,8 +116,6 @@ function closeSubmenu() {
     submenus.forEach(submenu => submenu.remove());
     document.getElementById('overlay').style.display = 'none';
 }
-
-let lastAddedItem = null;  // Variable to save last added item
 
 function addItem(itemName, itemPrice) {
     total += itemPrice + pfandAmount;
@@ -118,7 +131,7 @@ function addItem(itemName, itemPrice) {
     }
 
     lastAddedItem = { name: itemName, price: itemPrice + pfandAmount };  // Save last added item
-    updateTotal();
+    updateTotal('totalSum');
 }
 
 function removeLastItem() {
@@ -135,7 +148,7 @@ function removeLastItem() {
         }
 
         lastAddedItem = null;  // Resets variable after deleting last order
-        updateTotal();
+        updateTotal('totalSum');
     } else {
         alert('Es gibt keine Bestellung, die gelöscht werden kann.');
     }
@@ -153,17 +166,14 @@ function returnPfand() {
             total: -pfandAmount
         };
     }
-    updateTotal();
+    updateTotal('totalSum');
 }
 
-function updateTotal() {
-    document.getElementById('totalSum').innerText = `Gesamtbetrag: ${total.toFixed(2)} €`;
-}
-
-function clearOrder() {
-    total = 0;
-    order = {};
-    updateTotal();
+function updateTotal(target) {
+    document.getElementById(target).innerHTML = `
+    <span style="font-size: 22px;">Gesamtbetrag: </span>
+    <span class="highlight" style="font-weight: bold; font-size: 25px;"> ${total.toFixed(2)} €</span>
+    `;
 }
 
 function showSummary() {
@@ -175,15 +185,20 @@ function showSummary() {
         summaryHTML += `${item} x ${order[item].count}: ${order[item].total.toFixed(2)} €<br>`;
     }
     summaryHTML += `<br>`
-    summaryHTML += `<span style="font-size: 22px;">Gesamtbetrag: </span>
-    <span class="highlight" style="font-weight: bold; font-size: 25px;"> ${total.toFixed(2)} €</span>`;
     document.getElementById('orderSummary').innerHTML = summaryHTML;
+    updateTotal('summaryTotalSum')
+}
+
+function clearOrder() {
+    total = 0;
+    order = {};
+    updateTotal('totalSum');
 }
 
 function backToOrder() {
     document.getElementById('summaryPage').classList.add('hidden');
     document.getElementById('mainPage').classList.remove('hidden');
-    closeSubmenu();  // Schließt eventuell geöffnete Untermenüs
+    closeSubmenu();  // Closes all submenus
 }
 
 function resetOrder() {
@@ -194,8 +209,10 @@ function resetOrder() {
 function showTab(tabName) {
     document.getElementById('drinksGrid').classList.add('hidden');
     document.getElementById('foodGrid').classList.add('hidden');
+    document.getElementById('etcGrid').classList.add('hidden');
     document.getElementById('drinksTab').classList.remove('active');
     document.getElementById('foodTab').classList.remove('active');
+    document.getElementById('etcTab').classList.remove('active');
 
     if (tabName === 'drinks') {
         document.getElementById('drinksGrid').classList.remove('hidden');
@@ -203,9 +220,12 @@ function showTab(tabName) {
     } else if (tabName === 'food') {
         document.getElementById('foodGrid').classList.remove('hidden');
         document.getElementById('foodTab').classList.add('active');
+    } else if (tabName === 'etc') {
+        document.getElementById('etcGrid').classList.remove('hidden');
+        document.getElementById('etcTab').classList.add('active');
     }
 }
 
-// Dynamische Buttons erstellen
+// Create buttons dynamically
 createProductButtons();
-showTab('drinks');  // Startet mit dem Tab "Getränke"
+showTab('drinks');  // Set "drinks" tab first

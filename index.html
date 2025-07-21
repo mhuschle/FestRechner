@@ -14,26 +14,29 @@
 
     <div class="container" id="mainPage">
 
-        <div id="totalSum">Gesamtbetrag: 0.00 €</div>
+        <div id="totalSum"></div>
 
         <div class="tab-container">
             <div class="tab active" id="drinksTab" onclick="showTab('drinks')">Getränke</div>
             <div class="tab" id="foodTab" onclick="showTab('food')">Essen</div>
-                    </div>
+            <div class="tab" id="etcTab" onclick="showTab('etc')">Weitere</div>
+        </div>
 
         <div class="grid" id="drinksGrid"></div>
         <div class="grid hidden" id="foodGrid"></div>
+        <div class="grid hidden" id="etcGrid"></div>
 
         <div class="action-buttons">
             <button class="purple-button" id="pfandButton" onclick="returnPfand()">Pfand zurück</button>
             <button class="red-button"  id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
         </div>        
-        <button class="green-button" id="summaryButton" onclick="showSummary()">Zusammenfassung</button>
+        <button class="green-button" id="summaryButton" onclick="showSummary()"><br>Zusammenfassung<br><br></button>
     </div>
 
     <div class="container hidden" id="summaryPage">
-        <h1>Bestellungs-zusammenfassung</h1>
+        <h1>Bestellungszusammenfassung</h1>
         <div id="orderSummary"></div>
+        <div id="summaryTotalSum"></div>
         <div class="action-buttons">
             <button class="purple-button" onclick="backToOrder()">Zurück zur Bestellung</button>
             <button class="red-button"    onclick="resetOrder()">Bestellung zurücksetzen</button>
