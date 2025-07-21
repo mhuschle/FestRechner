@@ -92,7 +92,7 @@ function createSingleProductButton(product, container) {
     } else if (product.pfand == 0.00) {
         button.innerText = `${product.name}\n(${product.price.toFixed(2)} €)`;
     } else {
-        button.innerText = `${product.name}\n(${product.price.toFixed(2)} € + ${product.pfand.toFixed(2)} € Pfand)`;
+        button.innerText = `${product.name}\n(${product.price.toFixed(2)} € + ${product.pfand.toFixed(2)} €)`;
     }
 
     button.onclick = () => {
@@ -189,8 +189,8 @@ function returnPfand() {
 
 function updateTotal(target) {
     document.getElementById(target).innerHTML = `
-    <span style="font-size: 22px;">Gesamtbetrag: </span>
-    <span class="highlight" style="font-weight: bold; font-size: 25px;"> ${total.toFixed(2)} €</span>
+    <span style="font-size: 22px;">Gesamtbetrag : </span>
+    <span class="highlight" style="font-weight: bold; font-size: 26px;"> ${total.toFixed(2)} €</span>
     `;
 }
 

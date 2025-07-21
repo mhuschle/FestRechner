@@ -30,17 +30,20 @@ h1 {
     box-sizing: border-box;
 }
 
-#totalSum {
+.totalField {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 10px;
     color: #153633;
+    display: flex; 
+    justify-content: space-evenly;
 }
 
 .tab-container {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    gap: 2px;
 }
 
 .tab {
@@ -62,19 +65,24 @@ h1 {
 
 .tab.active {
     background-color: #16504c;
+    border: 2px solid #153633;  
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 3px;
-    margin-bottom: 12px;
+    gap: 2px;
+    margin-bottom: 10px;
 }
 
 button {
-    padding: 8px;
+    padding: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
     font-size: 16px;
     font-weight: bold;
+    /* overflow-wrap: break-word; */
+    word-wrap: break-word;
     cursor: pointer;
     border-radius: 8px;
     border: none;
@@ -124,6 +132,7 @@ button {
     background-color: #6d8a4dde;
     font-weight: bold;
     margin-top: 5px;
+    padding: 15px;
 }
 
 @media (hover: hover) and (pointer: fine) {
