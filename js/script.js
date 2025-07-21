@@ -92,7 +92,7 @@ function createSingleProductButton(product, container) {
     } else if (product.pfand == 0.00) {
         button.innerText = `${product.name}\n(${product.price.toFixed(2)} €)`;
     } else {
-        button.innerText = `${product.name}\n(${product.price.toFixed(2)} € + ${product.pfand.toFixed(2)} €)`;
+        button.innerText = `${product.name}\n(${product.price.toFixed(2)} + ${product.pfand.toFixed(2)} €)`;
     }
 
     button.onclick = () => {
@@ -116,7 +116,7 @@ function showSubmenu(name, submenuOptions) {
         if (option.pfand == 0.00) {
             submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
         } else {
-            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} € + ${option.pfand.toFixed(2)} €)`;
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
         }
         submenuButton.onclick = () => {
             addItem(name + ' ' + option.name, option.price, option.pfand);
@@ -189,7 +189,7 @@ function returnPfand() {
 
 function updateTotal(target) {
     document.getElementById(target).innerHTML = `
-    <span style="font-size: 22px;">Gesamtbetrag : </span>
+    <span>Gesamtbetrag : </span>
     <span class="highlight" style="font-weight: bold; font-size: 26px;"> ${total.toFixed(2)} €</span>
     `;
 }

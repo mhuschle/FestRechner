@@ -20,7 +20,7 @@ h1 {
 }
 
 .container {
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 0 15px #003435;
@@ -31,8 +31,7 @@ h1 {
 }
 
 .totalField {
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 24px;
     margin-bottom: 10px;
     color: #153633;
     display: flex;
@@ -42,13 +41,13 @@ h1 {
 .tab-container {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     gap: 2px;
 }
 
 .tab {
     cursor: pointer;
-    padding: 10px;
+    padding: 8px;
     font-size: 16px;
     font-weight: bold;
     background-color: #509f98;
@@ -181,7 +180,7 @@ button {
     flex-direction: column;
     gap: 10px;
     height: auto;
-    min-height: 300px;
+    min-height: 200px;
     width: 80%;
     justify-content: center;
 }
