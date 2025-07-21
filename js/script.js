@@ -97,7 +97,7 @@ function createSingleProductButton(product, container) {
 
     button.onclick = () => {
         if (product.submenu) {
-            showSubmenu(product.submenu);
+            showSubmenu(product.name, product.submenu);
         } else {
             addItem(product.name, product.price, product.pfand);
         }
@@ -105,7 +105,7 @@ function createSingleProductButton(product, container) {
     container.appendChild(button);
 }
 
-function showSubmenu(submenuOptions) {
+function showSubmenu(name, submenuOptions) {
     closeSubmenu();  // Closes already opened submenus
     const overlay = document.getElementById('overlay');
     const submenuDiv = document.createElement('div');
@@ -116,10 +116,10 @@ function showSubmenu(submenuOptions) {
         if (option.pfand == 0.00) {
             submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
         } else {
-            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} € + ${option.pfand.toFixed(2)} € Pfand)`;
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} € + ${option.pfand.toFixed(2)} €)`;
         }
         submenuButton.onclick = () => {
-            addItem(option.name, option.price, option.pfand);
+            addItem(name + ' ' + option.name, option.price, option.pfand);
             // closeSubmenu();  // Closes submenus after selection
         };
         submenuDiv.appendChild(submenuButton);
