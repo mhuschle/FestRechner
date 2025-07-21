@@ -6,6 +6,7 @@ body {
     box-sizing: border-box;
     text-align: center;
 }
+
 h1 {
     font-size: 25px;
     margin-top: 5px;
@@ -13,6 +14,7 @@ h1 {
     color: #101e1d;
     vertical-align: middle;
 }
+
 .highlight {
     background-color: #a9cecaa7;
 }
@@ -27,17 +29,20 @@ h1 {
     margin: 0 auto;
     box-sizing: border-box;
 }
+
 #totalSum {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 10px;
     color: #153633;
 }
+
 .tab-container {
     display: flex;
     justify-content: space-around;
     margin-bottom: 12px;
 }
+
 .tab {
     cursor: pointer;
     padding: 10px;
@@ -50,18 +55,22 @@ h1 {
     transition: background-color 0.3s;
     flex: 1;
 }
+
 .tab:hover {
     background-color: #153633;
 }
+
 .tab.active {
     background-color: #16504c;
 }
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 3px;
     margin-bottom: 12px;
 }
+
 button {
     padding: 8px;
     font-size: 16px;
@@ -74,11 +83,13 @@ button {
     width: 100%;
     box-sizing: border-box;
 }
+
 @media (hover: hover) and (pointer: fine) {
     button:hover {
         background-color: #16504c;
     }
 }
+
 .action-buttons {
     display: flex;
     flex-direction: column;
@@ -86,46 +97,56 @@ button {
     margin-top: 15px;
     gap: 5px;
 }
+
 @media (min-width: 300px) {
     .action-buttons {
         flex-direction: row;
     }
 }
+
 .action-buttons button {
     flex: 1;
     padding: 15px;
 }
+
 .purple-button {
     background-color: #634686c3;
     font-weight: bold;
 }
+
 @media (hover: hover) and (pointer: fine) {
     .purple-button:hover {
         background-color: #3D0087;
     }
 }
+
 .green-button {
     background-color: #6d8a4dde;
     font-weight: bold;
     margin-top: 5px;
 }
+
 @media (hover: hover) and (pointer: fine) {
     .green-button:hover {
         background-color: #4A8700;
     }
 }
+
 .red-button {
     background-color: #953d41c2;
     font-weight: bold;
 }
+
 @media (hover: hover) and (pointer: fine) {
     .red-button:hover {
         background-color: #870007;
     }
 }
+
 .hidden {
     display: none;
 }
+
 .overlay {
     position: fixed;
     top: 0;
@@ -136,6 +157,7 @@ button {
     display: none;
     z-index: 5;
 }
+
 .submenu {
     position: fixed;
     top: 40%;

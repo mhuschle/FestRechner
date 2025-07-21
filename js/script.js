@@ -68,7 +68,6 @@ function normalizeItem(item) {
     return normalized;
 }
 
-
 function createProductButtons() {
     loadProducts()
         .then(products => {
@@ -226,24 +225,20 @@ function resetOrder() {
 }
 
 function showTab(tabName) {
-    document.getElementById('drinksGrid').classList.add('hidden');
-    document.getElementById('foodGrid').classList.add('hidden');
-    document.getElementById('etcGrid').classList.add('hidden');
-    document.getElementById('drinksTab').classList.remove('active');
-    document.getElementById('foodTab').classList.remove('active');
-    document.getElementById('etcTab').classList.remove('active');
+    document.querySelectorAll('.grid').forEach(grid => {
+        grid.classList.add('hidden');
+    });
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
 
-    if (tabName === 'drinks') {
-        document.getElementById('drinksGrid').classList.remove('hidden');
-        document.getElementById('drinksTab').classList.add('active');
-    } else if (tabName === 'food') {
-        document.getElementById('foodGrid').classList.remove('hidden');
-        document.getElementById('foodTab').classList.add('active');
-    } else if (tabName === 'etc') {
-        document.getElementById('etcGrid').classList.remove('hidden');
-        document.getElementById('etcTab').classList.add('active');
-    }
+    const activeGrid = document.getElementById(`${tabName}Grid`);
+    const activeTab = document.getElementById(`${tabName}Tab`);
+
+    if (activeGrid) activeGrid.classList.remove('hidden');
+    if (activeTab) activeTab.classList.add('active');
 }
+
 
 // Create buttons dynamically
 createProductButtons();

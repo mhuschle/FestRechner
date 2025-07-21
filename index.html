@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -20,16 +21,18 @@
             <div class="tab active" id="drinksTab" onclick="showTab('drinks')">Getränke</div>
             <div class="tab" id="foodTab" onclick="showTab('food')">Essen</div>
             <div class="tab" id="etcTab" onclick="showTab('etc')">Weitere</div>
+            <!-- <div class="tab" id="blaTab" onclick="showTab('bla')">Bla</div> -->
         </div>
 
         <div class="grid" id="drinksGrid"></div>
         <div class="grid hidden" id="foodGrid"></div>
         <div class="grid hidden" id="etcGrid"></div>
+        <!-- <div class="grid hidden" id="blaGrid"></div> -->
 
         <div class="action-buttons">
             <button class="purple-button" id="pfandButton" onclick="returnPfand()">Pfand zurück</button>
-            <button class="red-button"  id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
-        </div>        
+            <button class="red-button" id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
+        </div>
         <button class="green-button" id="summaryButton" onclick="showSummary()"><br>Zusammenfassung<br><br></button>
     </div>
 
@@ -39,10 +42,11 @@
         <div id="summaryTotalSum"></div>
         <div class="action-buttons">
             <button class="purple-button" onclick="backToOrder()">Zurück zur Bestellung</button>
-            <button class="red-button"    onclick="resetOrder()">Bestellung zurücksetzen</button>
+            <button class="red-button" onclick="resetOrder()">Bestellung zurücksetzen</button>
         </div>
     </div>
 
     <script src="js/script.js"></script>
 </body>
+
 </html>

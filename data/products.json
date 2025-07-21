@@ -195,7 +195,7 @@
         },
         {
             "name": "Einzelne Eisbollen",
-            "submenu":[
+            "submenu": [
                 {
                     "name": "1 Kugel",
                     "price": 1.00
