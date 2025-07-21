@@ -37,72 +37,91 @@ async function loadProducts() {
         throw new Error('Could not import config.');
     }
     const products = await response.json();
-    return products;
+    const normalized = normalizeProducts(products); // <- Hier wird normalisiert
+    return normalized;
 }
+
+function normalizeProducts(products) {
+    const normalized = {};
+
+    for (const category in products) {
+        normalized[category] = products[category].map(item => normalizeItem(item));
+    }
+
+    return normalized;
+}
+
+function normalizeItem(item) {
+    const {
+        name = '',
+        price = 0.00,
+        pfand = 0.00,
+        submenu
+    } = item;
+
+    const normalized = { name, price, pfand };
+
+    if (submenu && Array.isArray(submenu)) {
+        normalized.submenu = submenu.map(sub => normalizeItem(sub));
+    }
+
+    return normalized;
+}
+
 
 function createProductButtons() {
-    const drinksGrid = document.getElementById('drinksGrid');
-    const foodGrid = document.getElementById('foodGrid');
-    const etcGrid = document.getElementById('etcGrid');
-
     loadProducts()
         .then(products => {
-
-            products.drinks.forEach(drink => {
-                const button = document.createElement('button');
-                button.innerText = `${drink.name} \n(${drink.price.toFixed(2)} € + ${drink.pfand.toFixed(2)} € Pfand)`;
-                button.onclick = () => {
-                    if (drink.submenu) {
-                        showSubmenu(drink.name, drink.submenu, drink.price, drink.pfand);
-                    } else {
-                        addItem(drink.name, drink.price, drink.pfand);
-                    }
-                };
-                drinksGrid.appendChild(button);
-            });
-
-            products.food.forEach(food => {
-                const button = document.createElement('button');
-                button.innerText = `${food.name} \n(${food.price.toFixed(2)} €)`;
-                button.onclick = () => {
-                    if (food.submenu) {
-                        showSubmenu(food.name, food.submenu, food.price, food.pfand);
-                    } else {
-                        addItem(food.name, food.price);
-                    }
-                };
-                foodGrid.appendChild(button);
-            });
-
-            products.etc.forEach(etc => {
-                const button = document.createElement('button');
-                button.innerText = `${etc.name} \n(${etc.price.toFixed(2)} €)`;
-                button.onclick = () => {
-                    if (etc.submenu) {
-                        showSubmenu(etc.name, etc.submenu, etc.price, etc.pfand);
-                    } else {
-                        addItem(etc.name, etc.price);
-                    }
-                };
-                etcGrid.appendChild(button);
-            });
+            for (const category in products) {
+                const grid = document.getElementById(`${category}Grid`);
+                if (!grid) {
+                    console.warn(`Kein Grid für Kategorie "${category}" gefunden.`);
+                    continue;
+                }
+                products[category].forEach(item => {
+                    createSingleProductButton(item, grid);
+                });
+            }
         })
+        .catch(err => console.error('Fehler beim Laden der Produkte:', err));
 }
 
-function showSubmenu(productName, submenuOptions, basePrice, pfand) {
+function createSingleProductButton(product, container) {
+    const button = document.createElement('button');
+    if (product.submenu) {
+        button.innerText = `${product.name}\n(Untermenü)`;
+    } else if (product.pfand == 0.00) {
+        button.innerText = `${product.name}\n(${product.price.toFixed(2)} €)`;
+    } else {
+        button.innerText = `${product.name}\n(${product.price.toFixed(2)} € + ${product.pfand.toFixed(2)} € Pfand)`;
+    }
+
+    button.onclick = () => {
+        if (product.submenu) {
+            showSubmenu(product.submenu);
+        } else {
+            addItem(product.name, product.price, product.pfand);
+        }
+    };
+    container.appendChild(button);
+}
+
+function showSubmenu(submenuOptions) {
     closeSubmenu();  // Closes already opened submenus
     const overlay = document.getElementById('overlay');
     const submenuDiv = document.createElement('div');
     submenuDiv.className = 'submenu';
 
     submenuOptions.forEach(option => {
-        const endPrice = basePrice + option.additionalPrice;
         const submenuButton = document.createElement('button');
-        // submenuButton.innerText = `${option.name} (${endPrice.toFixed(2)} € + ${pfand.toFixed(2)} € Pfand)`;
-        submenuButton.innerText = `${option.name} \n(${endPrice.toFixed(2)} €)`;
+        if (option.pfand == 0.00) {
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
+        } else {
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} € + ${option.pfand.toFixed(2)} € Pfand)`;
+        }
         submenuButton.onclick = () => {
-            addItem(`${productName} ${option.name}`, endPrice, pfand);
-            closeSubmenu();  // Closes submenus after selection
+            addItem(option.name, option.price, option.pfand);
+            // closeSubmenu();  // Closes submenus after selection
         };
         submenuDiv.appendChild(submenuButton);
     });
@@ -117,20 +136,20 @@ function closeSubmenu() {
     document.getElementById('overlay').style.display = 'none';
 }
 
-function addItem(itemName, itemPrice) {
-    total += itemPrice + pfandAmount;
+function addItem(itemName, itemPrice, itemPfand) {
+    total += itemPrice + itemPfand;
 
     if (order[itemName]) {
         order[itemName].count += 1;
-        order[itemName].total += itemPrice + pfandAmount;
+        order[itemName].total += itemPrice + itemPfand;
     } else {
         order[itemName] = {
             count: 1,
-            total: itemPrice + pfandAmount
+            total: itemPrice + itemPfand
         };
     }
 
-    lastAddedItem = { name: itemName, price: itemPrice + pfandAmount };  // Save last added item
+    lastAddedItem = { name: itemName, price: itemPrice + itemPfand };  // Save last added item
     updateTotal('totalSum');
 }
 

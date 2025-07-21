@@ -1,64 +1,214 @@
 {
     "drinks": [
-        { "name": "Bier","price": 3.00                                      ,"pfand": 0.00},
-        { "name": "Radler",  "price": 3.00                                  ,"pfand": 0.00},
-        
-        { "name": "Weinschorle", "price": 3.00                              ,"pfand": 0.00},
-        { "name": "Weißwein", "price": 3.50,
-        "submenu": [
-            { "name": "Flasche 1.0l", "additionalPrice": 9.50},
-            { "name": "Glas 0.25l", "additionalPrice": 0.00}
-        ]                                                               ,"pfand": 0.00},
-        { "name": "Rotwein", "price": 3.50,
-        "submenu": [
-            { "name": "Flasche 1.0l", "additionalPrice": 9.50},
-            { "name": "Glas 0.25l", "additionalPrice": 0.00}
-        ]                                                               ,"pfand": 0.00},
-
-        { "name": "Sommerschorle", "price": 6.00                            ,"pfand": 0.00},
-        { "name": "Aperol", "price": 6.00                                   ,"pfand": 0.00},
-
-        { "name": "Cola", "price": 3.00                                     ,"pfand": 0.00},
-        { "name": "Fanta", "price": 3.00                                    ,"pfand": 0.00},
-        { "name": "Johannisbeerschorle", "price": 3.50                      ,"pfand": 0.00},
-        { "name": "Apfelschorle", "price": 3.50                             ,"pfand": 0.00},
-        { "name": "Sprudel", "price": 2.50                                  ,"pfand": 0.00},
-        { "name": "Topfit", "price": 3.50                                   ,"pfand": 0.00}
+        {
+            "name": "Bier",
+            "price": 3.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Radler",
+            "price": 3.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Weinschorle",
+            "price": 3.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Weißwein",
+            "submenu": [
+                {
+                    "name": "Flasche 1.0l",
+                    "price": 13.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Glas 0.25l",
+                    "price": 3.50,
+                    "pfand": 2.00
+                }
+            ]
+        },
+        {
+            "name": "Rotwein",
+            "submenu": [
+                {
+                    "name": "Flasche 1.0l",
+                    "price": 13.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Glas 0.25l",
+                    "price": 3.50,
+                    "pfand": 2.00
+                }
+            ]
+        },
+        {
+            "name": "Sommerschorle",
+            "price": 6.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Aperol",
+            "price": 6.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Cola",
+            "price": 3.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Fanta",
+            "price": 3.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Johannisbeerschorle",
+            "price": 3.50,
+            "pfand": 2.00
+        },
+        {
+            "name": "Apfelschorle",
+            "price": 3.50,
+            "pfand": 2.00
+        },
+        {
+            "name": "Sprudel",
+            "price": 2.50,
+            "pfand": 2.00
+        },
+        {
+            "name": "Topfit",
+            "price": 3.50,
+            "pfand": 2.00
+        }
     ],
-
-
     "food": [
-        { "name": "Grillwurst", "price": 4.50,
+        {
+            "name": "Grillwurst",
             "submenu": [
-                { "name": "mit Kartoffelsalat", "additionalPrice": 2.00 },
-                { "name": "mit Weck", "additionalPrice": 0.00 }
+                {
+                    "name": "mit Kartoffelsalat",
+                    "price": 6.50
+                },
+                {
+                    "name": "mit Weck",
+                    "price": 4.50
+                }
             ]
         },
-        { "name": "Currywurst mit Weck", "price": 4.50 },
-        { "name": "Putensteak", "price": 6.50,
+        {
+            "name": "Currywurst mit Weck",
+            "price": 4.50
+        },
+        {
+            "name": "Putensteak",
             "submenu": [
-                { "name": "mit Kartoffelsalat", "additionalPrice": 2.00},
-                { "name": "im Weck", "additionalPrice": 0.00 }
+                {
+                    "name": "mit Kartoffelsalat",
+                    "price": 8.50
+                },
+                {
+                    "name": "im Weck",
+                    "price": 6.50
+                }
             ]
         },
-        { "name": "Schweinesteak", "price": 6.50,
+        {
+            "name": "Schweinesteak",
             "submenu": [
-                { "name": "mit Kartoffelsalat", "additionalPrice": 2.00},
-                { "name": "im Weck", "additionalPrice": 0.00 }
+                {
+                    "name": "mit Kartoffelsalat",
+                    "price": 8.50
+                },
+                {
+                    "name": "im Weck",
+                    "price": 6.50
+                }
             ]
         },
-        { "name": "Gemüseküchele", "price": 4.50,
+        {
+            "name": "Gemüseküchele",
+            "price": 4.50,
             "submenu": [
-                { "name": "mit Kartoffelsalat", "additionalPrice": 2.00},
-                { "name": "im Weck", "additionalPrice": 0.00 }
+                {
+                    "name": "mit Kartoffelsalat",
+                    "price": 6.50
+                },
+                {
+                    "name": "mit Weck",
+                    "price": 4.50
+                }
             ]
         },
-        { "name": "Wurst-/Käseweck", "price": 3.50 },
-
-        { "name": "Sauerbraten mit Nudeln", "price": 15.50 },
-
-        { "name": "Eis", "price": 1.50},
-        { "name": "Eiskaffee", "price": 6.00},
-        { "name": "Eisschoki", "price": 6.00}
+        {
+            "name": "Wurst-/Käseweck",
+            "price": 3.50
+        },
+        {
+            "name": "Sauerbraten mit Nudeln",
+            "price": 15.50
+        },
+        {
+            "name": "Eis am Stiel",
+            "price": 1.50
+        },
+        {
+            "name": "Eiskaffee",
+            "price": 6.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Eisschoki",
+            "price": 6.00,
+            "pfand": 2.00
+        }
+    ],
+    "etc": [
+        {
+            "name": "Einzelner Weck",
+            "price": 1.00
+        },
+        {
+            "name": "Einzelnes Steak",
+            "price": 5.00
+        },
+        {
+            "name": "Einzelne Grillwurst",
+            "price": 3.00
+        },
+        {
+            "name": "Einzelnes Gemüseküchele",
+            "price": 3.00
+        },
+        {
+            "name": "Nudeln mit Soße",
+            "price": 5.00
+        },
+        {
+            "name": "Wasser classic 0.7l",
+            "price": 5.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Einzelne Eisbollen",
+            "submenu":[
+                {
+                    "name": "1 Kugel",
+                    "price": 1.00
+                },
+                {
+                    "name": "2 Kugeln",
+                    "price": 2.00
+                },
+                {
+                    "name": "3 Kugeln",
+                    "price": 3.00
+                }
+            ]
+        }
     ]
 }
