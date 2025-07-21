@@ -216,6 +216,7 @@ function clearOrder() {
 function backToOrder() {
     document.getElementById('summaryPage').classList.add('hidden');
     document.getElementById('mainPage').classList.remove('hidden');
+    document.getElementById('mainPage').scrollIntoView({ behavior: 'smooth' });
     closeSubmenu();  // Closes all submenus
 }
 
@@ -237,6 +238,8 @@ function showTab(tabName) {
 
     if (activeGrid) activeGrid.classList.remove('hidden');
     if (activeTab) activeTab.classList.add('active');
+
+    document.getElementById('mainPage').scrollIntoView({ behavior: 'smooth' });
 }
 
 
