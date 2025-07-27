@@ -124,15 +124,16 @@ function createPfandButton(pfandList) {
 function showSubmenu(name, submenuOptions) {
     closeSubmenu();  // Closes already opened submenus
     const overlay = document.getElementById('overlay');
+    
     const submenuDiv = document.createElement('div');
     submenuDiv.className = 'submenu';
 
+    const submenuTitle = document.createElement('submenu-title');
+    submenuTitle.className = 'submenu-title';
+
     if (name === 'Pfand') {
-        const submenuTitle = document.createElement('submenu-title');
-        submenuTitle.className = 'submenu-title';
         submenuTitle.innerText = `Pfand`;
         submenuDiv.appendChild(submenuTitle);
-
         submenuOptions.forEach(option => {
             const submenuButton = document.createElement('button');
             submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)}€)`;
@@ -143,11 +144,8 @@ function showSubmenu(name, submenuOptions) {
             submenuDiv.appendChild(submenuButton);
         });
     } else {
-        const submenuTitle = document.createElement('submenu-title');
-        submenuTitle.className = 'submenu-title';
         submenuTitle.innerText = `${name}`;
         submenuDiv.appendChild(submenuTitle);
-
         submenuOptions.forEach(option => {
             const submenuButton = document.createElement('button');
             if (option.pfand == 0.00) {
