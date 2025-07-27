@@ -184,3 +184,12 @@ button {
     width: 80%;
     justify-content: center;
 }
+
+.submenu-title {
+    font-size: 22px;
+    font-weight: bold;
+    word-wrap: break-word;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: #101e1d;
+}

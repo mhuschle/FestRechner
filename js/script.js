@@ -1,8 +1,7 @@
-let pfandAmount = 0.00;
 let total = 0;
 let order = {};
 let lastAddedItem = null;  // Variable to save last added item
-updateTotal('totalSum')    // Write text with initial total=0 
+updateTotal('totalSum');   // Write text with initial total=0 
 
 async function loadConfig() {
     const response = await fetch('data/config.json');
@@ -19,16 +18,7 @@ loadConfig().then(settings => {
     <span style="font-weight: bold; font-size: 25px;">${settings.appName}</span>
     <span style="font-weight: normal; font-size: 18px;"> - ${settings.version}</span>
     `;
-    pfandAmount = parseFloat(settings.pfand)
-    if (pfandAmount > 0) {
-        document.getElementById('pfandButton').innerHTML = `
-        Pfand zurück <br>(${pfandAmount.toFixed(2)} €)
-        `;
-    } else {
-        document.getElementById('pfandButton').style.display = 'none'
-    }
-}).catch(err => {
-    console.error(err);
+    createPfandButton(settings.pfand);
 });
 
 async function loadProducts() {
@@ -105,26 +95,73 @@ function createSingleProductButton(product, container) {
     container.appendChild(button);
 }
 
+function createPfandButton(pfandList) {
+    const pfandButtonItem = document.getElementById('pfandButton');
+
+    if (!Array.isArray(pfandList)) {
+        console.warn('Pfandangabe in data/config.json ist fehlerhaft.');
+        pfandButtonItem.style.display = 'none';
+        return;
+    }
+
+    if (pfandList.length === 0) {
+        pfandButtonItem.style.display = 'none';
+    } else if (pfandList.length === 1) {
+        if (parseFloat(pfandList[0].price) > 0) {
+            pfandButtonItem.innerHTML = `
+            Pfand zurück <br>(${parseFloat(pfandList[0].price).toFixed(2)} €)
+            `;
+            pfandButtonItem.onclick = () => addItem('Pfand ' + pfandList[0].name, -parseFloat(pfandList[0].price), 0);
+        } else {
+            pfandButtonItem.style.display = 'none';
+        }
+    } else if (pfandList.length > 1) {
+        pfandButtonItem.innerText = `Pfand zurück\n(Untermenü)`;
+        pfandButtonItem.onclick = () => showSubmenu('Pfand', pfandList);
+    }
+}
+
 function showSubmenu(name, submenuOptions) {
     closeSubmenu();  // Closes already opened submenus
     const overlay = document.getElementById('overlay');
     const submenuDiv = document.createElement('div');
     submenuDiv.className = 'submenu';
 
-    submenuOptions.forEach(option => {
-        const submenuButton = document.createElement('button');
-        if (option.pfand == 0.00) {
-            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
-        } else {
-            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
-        }
-        submenuButton.onclick = () => {
-            addItem(name + ' ' + option.name, option.price, option.pfand);
-            // closeSubmenu();  // Closes submenus after selection
-        };
-        submenuDiv.appendChild(submenuButton);
-    });
+    if (name === 'Pfand') {
+        const submenuTitle = document.createElement('submenu-title');
+        submenuTitle.className = 'submenu-title';
+        submenuTitle.innerText = `Pfand`;
+        submenuDiv.appendChild(submenuTitle);
 
+        submenuOptions.forEach(option => {
+            const submenuButton = document.createElement('button');
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)}€)`;
+            submenuButton.onclick = () => {
+                addItem(name + ' ' + option.name, -parseFloat(option.price), 0);
+                // closeSubmenu();  // Closes submenus after selection
+            };
+            submenuDiv.appendChild(submenuButton);
+        });
+    } else {
+        const submenuTitle = document.createElement('submenu-title');
+        submenuTitle.className = 'submenu-title';
+        submenuTitle.innerText = `${name}`;
+        submenuDiv.appendChild(submenuTitle);
+
+        submenuOptions.forEach(option => {
+            const submenuButton = document.createElement('button');
+            if (option.pfand == 0.00) {
+                submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
+            } else {
+                submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
+            }
+            submenuButton.onclick = () => {
+                addItem(name + ' ' + option.name, option.price, option.pfand);
+                // closeSubmenu();  // Closes submenus after selection
+            };
+            submenuDiv.appendChild(submenuButton);
+        });
+    }
     document.body.appendChild(submenuDiv);
     overlay.style.display = 'block';
 }
@@ -172,21 +209,6 @@ function removeLastItem() {
     }
 }
 
-function returnPfand() {
-    total -= pfandAmount;
-
-    if (order['Pfand retour']) {
-        order['Pfand retour'].count += 1;
-        order['Pfand retour'].total -= pfandAmount;
-    } else {
-        order['Pfand retour'] = {
-            count: 1,
-            total: -pfandAmount
-        };
-    }
-    updateTotal('totalSum');
-}
-
 function updateTotal(target) {
     document.getElementById(target).innerHTML = `
     <span>Gesamtbetrag : </span>
@@ -202,9 +224,9 @@ function showSummary() {
     for (const item in order) {
         summaryHTML += `${item} x ${order[item].count}: ${order[item].total.toFixed(2)} €<br>`;
     }
-    summaryHTML += `<br>`
+    summaryHTML += `<br>`;
     document.getElementById('orderSummary').innerHTML = summaryHTML;
-    updateTotal('summaryTotalSum')
+    updateTotal('summaryTotalSum');
 }
 
 function clearOrder() {
