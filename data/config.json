@@ -5,6 +5,10 @@
         {
             "name": "Glas",
             "price": 2.00
+        },
+        {
+            "name": "Maß",
+            "price": 5.00
         }
     ]
 }
