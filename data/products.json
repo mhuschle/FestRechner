@@ -1,26 +1,46 @@
 {
     "drinks": [
         {
-            "name": "Bier",
-            "price": 3.00,
-            "pfand": 2.00
+            "name": "Bier/Radler",
+            "submenu": [
+                {
+                    "name": "Maß 1.0l",
+                    "price": 10.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Krug 0.4l",
+                    "price": 5.00,
+                    "pfand": 2.00
+                }
+            ]
         },
         {
-            "name": "Radler",
-            "price": 3.00,
-            "pfand": 2.00
+            "name": "Weizen",
+            "submenu": [
+                {
+                    "name": "Maß 1.0l",
+                    "price": 10.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Krug 0.4l",
+                    "price": 5.00,
+                    "pfand": 2.00
+                }
+            ]
         },
         {
             "name": "Weinschorle",
-            "price": 3.00,
-            "pfand": 2.00
-        },
-        {
-            "name": "Weißwein",
             "submenu": [
                 {
-                    "name": "Flasche 1.0l",
-                    "price": 13.00,
+                    "name": "Maß 1.0l",
+                    "price": 11.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Krug 0.4l",
+                    "price": 5.50,
                     "pfand": 2.00
                 },
                 {
@@ -31,7 +51,22 @@
             ]
         },
         {
-            "name": "Rotwein",
+            "name": "Weißwein Müller Thurgau",
+            "submenu": [
+                {
+                    "name": "Flasche 1.0l",
+                    "price": 12.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Glas 0.25l",
+                    "price": 4.00,
+                    "pfand": 2.00
+                }
+            ]
+        },
+        {
+            "name": "Rotwein Spätburgunder",
             "submenu": [
                 {
                     "name": "Flasche 1.0l",
@@ -40,33 +75,18 @@
                 },
                 {
                     "name": "Glas 0.25l",
-                    "price": 3.50,
+                    "price": 4.50,
                     "pfand": 2.00
                 }
             ]
         },
         {
-            "name": "Sommerschorle",
-            "price": 6.00,
-            "pfand": 2.00
-        },
-        {
-            "name": "Aperol",
-            "price": 6.00,
-            "pfand": 2.00
-        },
-        {
-            "name": "Cola",
+            "name": "Cola/Fanta",
             "price": 3.00,
             "pfand": 2.00
         },
         {
-            "name": "Fanta",
-            "price": 3.00,
-            "pfand": 2.00
-        },
-        {
-            "name": "Johannisbeerschorle",
+            "name": "Spezi",
             "price": 3.50,
             "pfand": 2.00
         },
@@ -77,138 +97,94 @@
         },
         {
             "name": "Sprudel",
-            "price": 2.50,
-            "pfand": 2.00
-        },
-        {
-            "name": "Topfit",
-            "price": 3.50,
-            "pfand": 2.00
+            "submenu": [
+                {
+                    "name": "Groß 0.7l",
+                    "price": 3.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Klein 0.5l",
+                    "price": 2.50,
+                    "pfand": 2.00
+                }
+            ]
         }
     ],
     "food": [
         {
-            "name": "Grillwurst",
-            "submenu": [
-                {
-                    "name": "mit Kartoffelsalat",
-                    "price": 6.50
-                },
-                {
-                    "name": "mit Weck",
-                    "price": 4.50
-                }
-            ]
-        },
-        {
-            "name": "Currywurst mit Weck",
-            "price": 4.50
-        },
-        {
-            "name": "Putensteak",
-            "submenu": [
-                {
-                    "name": "mit Kartoffelsalat",
-                    "price": 8.50
-                },
-                {
-                    "name": "im Weck",
-                    "price": 6.50
-                }
-            ]
-        },
-        {
-            "name": "Schweinesteak",
-            "submenu": [
-                {
-                    "name": "mit Kartoffelsalat",
-                    "price": 8.50
-                },
-                {
-                    "name": "im Weck",
-                    "price": 6.50
-                }
-            ]
-        },
-        {
-            "name": "Gemüseküchele",
-            "price": 4.50,
-            "submenu": [
-                {
-                    "name": "mit Kartoffelsalat",
-                    "price": 6.50
-                },
-                {
-                    "name": "mit Weck",
-                    "price": 4.50
-                }
-            ]
-        },
-        {
             "name": "Wurst-/Käseweck",
-            "price": 3.50
+            "price": 3.00
         },
         {
-            "name": "Sauerbraten mit Nudeln",
-            "price": 15.50
+            "name": "Pommes",
+            "price": 3.00
         },
         {
-            "name": "Eis am Stiel",
+            "name": "Brezel",
             "price": 1.50
         },
         {
-            "name": "Eiskaffee",
-            "price": 6.00,
-            "pfand": 2.00
+            "name": "1 Paar Weißwürste mit Brezel",
+            "price": 5.50
         },
         {
-            "name": "Eisschoki",
-            "price": 6.00,
-            "pfand": 2.00
+            "name": "Fleischkäse mit Pommes",
+            "price": 7.50
+        },
+        {
+            "name": "Fleischkäse im Weck",
+            "price": 5.50
+        },
+        {
+            "name": "Gemüseküchele mit Pommes",
+            "price": 7.50
+        },
+        {
+            "name": "Gemüseküchele im Weck",
+            "price": 5.50
+        },
+        {
+            "name": "Einzelner Weck",
+            "price": 1.00
         }
     ],
     "etc": [
         {
-            "name": "Einzelner Weck",
-            "price": 1.00
+            "name": "Lebkuchenherzle",
+            "price": 4.00
         },
         {
-            "name": "Einzelnes Steak",
-            "price": 5.00
-        },
-        {
-            "name": "Einzelne Grillwurst",
-            "price": 3.00
-        },
-        {
-            "name": "Einzelnes Gemüseküchele",
-            "price": 3.00
-        },
-        {
-            "name": "Nudeln mit Soße",
-            "price": 5.00
-        },
-        {
-            "name": "Wasser classic 0.7l",
-            "price": 5.00,
+            "name": "Mischgetränk 0.2l",
+            "price": 6.00,
             "pfand": 2.00
         },
         {
-            "name": "Einzelne Eisbollen",
-            "submenu": [
-                {
-                    "name": "1 Kugel",
-                    "price": 1.00
-                },
-                {
-                    "name": "2 Kugeln",
-                    "price": 2.00
-                },
-                {
-                    "name": "3 Kugeln",
-                    "price": 3.00
-                }
-            ]
+            "name": "Mischgetränk 0.4l",
+            "price": 11.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Bachwasser",
+            "price": 4.50
+        },
+        {
+            "name": "Likör Shot",
+            "price": 5.00
+        },
+        {
+            "name": "Likör Flasche",
+            "price": 75.00,
+            "pfand": 2.00
+        },
+        {
+            "name": "Likör Meter",
+            "price": 14.00,
+            "pfand": 10.00
+        },
+        {
+            "name": "Pfand Rückgabe Likör Meter",
+            "price": -10.00
         }
     ]
 }

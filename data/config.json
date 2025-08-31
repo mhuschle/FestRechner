@@ -3,12 +3,8 @@
     "version": "Juli 2025",
     "pfand": [
         {
-            "name": "Glas",
+            "name": "Gläser/Flaschen",
             "price": 2.00
-        },
-        {
-            "name": "Maß",
-            "price": 5.00
         }
     ]
 }
