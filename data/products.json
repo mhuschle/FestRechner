@@ -31,26 +31,6 @@
             ]
         },
         {
-            "name": "Weinschorle",
-            "submenu": [
-                {
-                    "name": "Maß 1.0l",
-                    "price": 11.00,
-                    "pfand": 2.00
-                },
-                {
-                    "name": "Krug 0.4l",
-                    "price": 5.50,
-                    "pfand": 2.00
-                },
-                {
-                    "name": "Glas 0.25l",
-                    "price": 3.50,
-                    "pfand": 2.00
-                }
-            ]
-        },
-        {
             "name": "Weißwein Müller Thurgau",
             "submenu": [
                 {
@@ -76,6 +56,26 @@
                 {
                     "name": "Glas 0.25l",
                     "price": 4.50,
+                    "pfand": 2.00
+                }
+            ]
+        },
+        {
+            "name": "Weinschorle",
+            "submenu": [
+                {
+                    "name": "Maß 1.0l",
+                    "price": 11.00,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Krug 0.4l",
+                    "price": 5.50,
+                    "pfand": 2.00
+                },
+                {
+                    "name": "Glas 0.25l",
+                    "price": 3.50,
                     "pfand": 2.00
                 }
             ]
@@ -170,7 +170,7 @@
         },
         {
             "name": "Likör Shot",
-            "price": 5.00
+            "price": 1.50
         },
         {
             "name": "Likör Flasche",
