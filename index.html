@@ -20,38 +20,43 @@
 <body>
     <div class="overlay" id="overlay" onclick="closeSubmenu()"></div>
 
-    <h1 id="header"> FestRechner</h1>
+    <div class=".title-container" id="header">FestRechner</div>
 
     <div class="container" id="mainPage">
 
         <div class="totalField" id="totalSum"></div>
 
-        <div class="tab-container">
-            <div class="tab active" id="drinksTab" onclick="showTab('drinks')">Getränke</div>
-            <div class="tab" id="foodTab" onclick="showTab('food')">Essen</div>
-            <div class="tab" id="etcTab" onclick="showTab('etc')">Extras</div>
-            <!-- <div class="tab" id="blaTab" onclick="showTab('bla')">Bla</div> -->
+        <div class="tabContainer">
+            <button id="drinksTab" onclick="showTab('drinks')">Getränke</button>
+            <button id="foodTab" onclick="showTab('food')">Essen</button>
+            <button id="etcTab" onclick="showTab('etc')">Extras</button>
+            <!-- <div class="button" id="blaTab" onclick="showTab('bla')">BlaBlaBla</button> -->
         </div>
 
         <div class="grid" id="drinksGrid"></div>
         <div class="grid hidden" id="foodGrid"></div>
         <div class="grid hidden" id="etcGrid"></div>
         <!-- <div class="grid hidden" id="blaGrid"></div> -->
-
-        <div class="action-buttons">
-            <button class="purple-button" id="pfandButton">Pfand zurück</button>
-            <button class="red-button" id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
-        </div>
-        <button class="green-button" id="summaryButton" onclick="showSummary()">Zusammenfassung</button>
     </div>
 
     <div class="container hidden" id="summaryPage">
-        <h1>Zusammenfassung</h1>
+        <h1 class="totalField">Zusammenfassung</h1>
         <div id="orderSummary"></div>
         <div class="totalField" id="summaryTotalSum"></div>
+    </div>
+
+    <div class="fixedButtons" id="mainButtons">
         <div class="action-buttons">
-            <button class="purple-button" onclick="backToOrder()">Zurück zur Bestellung</button>
-            <button class="red-button" onclick="resetOrder()">Bestellung zurücksetzen</button>
+            <button class="button-purple" id="pfandButton">Pfand zurück</button>
+            <button class="button-red" id="deleteButton" onclick="removeLastItem()">Letzte Eingabe löschen</button>
+        </div>
+        <button class="button-green" id="summaryButton" onclick="showSummary()">Zusammenfassung</button>
+    </div>
+
+    <div class="fixedButtons hidden" id="summaryButtons">
+        <div class="action-buttons">
+            <button class="button-purple" onclick="backToOrder()">Zurück zur Bestellung</button>
+            <button class="button-red" onclick="resetOrder()">Bestellung zurücksetzen</button>
         </div>
     </div>
 

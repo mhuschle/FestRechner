@@ -1,54 +1,80 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 8px;
+    margin: auto auto;
+    padding: 4px;
     background-color: #d4e7e4;
     box-sizing: border-box;
     text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-h1 {
-    font-size: 25px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+.title-container {
+    flex: 0 0 36px;
+    min-height: 36px;
+    font-size: 3.5vh;
+    margin-top: 2px;
+    margin-bottom: 10px;
     color: #101e1d;
     vertical-align: middle;
+    white-space: nowrap;
 }
 
 .highlight {
     background-color: #a9cecaa7;
 }
 
+button {
+    border-style: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: clamp(2.4vh, 2.5vh, 2.7vh);
+    word-wrap: break-word;
+    cursor: pointer;
+    color: black;
+    width: 100%;
+}
+
 .container {
+    flex: 1;
+    min-height: 0;
     padding: 5px;
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 0 15px #003435;
-    max-height: 90%;
-    max-width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
+    width: 100%;
+    min-width: 250px;
 }
 
 .totalField {
-    font-size: 24px;
-    margin-bottom: 10px;
+    height: 6%;
+    font-size: clamp(3vh, 3.5vh, 4vh);
+    margin: 10px;
     color: #153633;
     display: flex;
     justify-content: space-evenly;
 }
 
-.tab-container {
+.tabContainer {
     display: flex;
     justify-content: space-around;
+    height: 8%;
     margin-bottom: 5px;
-    gap: 2px;
+    column-gap: 2px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
 }
 
-.tab {
+.tabContainer button {
+    flex: 0 0 auto;
     cursor: pointer;
     padding: 8px;
-    font-size: 16px;
     font-weight: bold;
     background-color: #509f98;
     color: white;
@@ -58,95 +84,99 @@ h1 {
     flex: 1;
 }
 
-.tab:hover {
+.tabContainer button:hover {
     background-color: #153633;
 }
 
-.tab.active {
+.tabContainer button.active {
     background-color: #16504c;
     border: 2px solid #153633;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 2px;
-    margin-bottom: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 3px;
+    height: 82%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
 }
 
-button {
+.grid button {
     padding: 6px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 16px;
-    font-weight: bold;
-    /* overflow-wrap: break-word; */
-    word-wrap: break-word;
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
     background-color: #509f997f;
-    color: black;
-    width: 100%;
     box-sizing: border-box;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    button:hover {
+    .grid button:hover {
         background-color: #16504c;
     }
 }
 
-.action-buttons {
+.fixedButtons {
+    flex: 0 0 auto;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 0 15px #003435;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-top: 15px;
     gap: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: auto auto;
+    width: 100%;
+    min-width: 250px;
 }
 
-@media (min-width: 300px) {
-    .action-buttons {
-        flex-direction: row;
-    }
-}
-
-.action-buttons button {
+.fixedButtons button {
     flex: 1;
     padding: 15px;
 }
 
-.purple-button {
+.fixedButtons .action-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+@media (min-width: 300px) {
+    .fixedButtons .action-buttons {
+        flex-direction: row;
+    }
+}
+
+.button-purple {
     background-color: #634686c3;
-    font-weight: bold;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .purple-button:hover {
+    .button-purple:hover {
         background-color: #3D0087;
     }
 }
 
-.green-button {
+.button-green {
     background-color: #6d8a4dde;
-    font-weight: bold;
-    margin-top: 5px;
-    padding: 15px;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .green-button:hover {
+    .button-green:hover {
         background-color: #4A8700;
     }
 }
 
-.red-button {
+.button-red {
     background-color: #953d41c2;
-    font-weight: bold;
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .red-button:hover {
+    .button-red:hover {
         background-color: #870007;
     }
 }
@@ -186,10 +216,19 @@ button {
 }
 
 .submenu-title {
-    font-size: 22px;
+    font-size: 3.5vh;
     font-weight: bold;
     word-wrap: break-word;
     margin-top: 5px;
     margin-bottom: 15px;
     color: #101e1d;
+}
+
+.submenu button {
+    padding: 4px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #509f997f;
+    box-sizing: border-box;
+    min-height: 9vh;
 }

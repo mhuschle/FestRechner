@@ -15,8 +15,8 @@ async function loadConfig() {
 loadConfig().then(settings => {
     document.title = settings.appName + " - " + settings.version;
     document.getElementById('header').innerHTML = `
-    <span style="font-weight: bold; font-size: 25px;">${settings.appName}</span>
-    <span style="font-weight: normal; font-size: 18px;"> - ${settings.version}</span>
+    <span style="font-weight: bold; font-size: 3.5vh;">${settings.appName}</span>
+    <span style="font-weight: normal; font-size: 2vh;"> - ${settings.version}</span>
     `;
     createPfandButton(settings.pfand);
 });
@@ -209,14 +209,16 @@ function removeLastItem() {
 
 function updateTotal(target) {
     document.getElementById(target).innerHTML = `
-    <span>Gesamtbetrag : </span>
-    <span class="highlight" style="font-weight: bold; font-size: 26px;"> ${total.toFixed(2)} €</span>
+    <span>Betrag : </span>
+    <span class="highlight" style="font-weight: bold;"> ${total.toFixed(2)} €</span>
     `;
 }
 
 function showSummary() {
     document.getElementById('mainPage').classList.add('hidden');
     document.getElementById('summaryPage').classList.remove('hidden');
+    document.getElementById('mainButtons').classList.add('hidden');
+    document.getElementById('summaryButtons').classList.remove('hidden');
 
     let summaryHTML = '';
     for (const item in order) {
@@ -235,7 +237,9 @@ function clearOrder() {
 
 function backToOrder() {
     document.getElementById('summaryPage').classList.add('hidden');
+    document.getElementById('summaryButtons').classList.add('hidden');
     document.getElementById('mainPage').classList.remove('hidden');
+    document.getElementById('mainButtons').classList.remove('hidden');
     document.getElementById('mainPage').scrollIntoView({ behavior: 'smooth' });
     closeSubmenu();  // Closes all submenus
 }
@@ -249,7 +253,7 @@ function showTab(tabName) {
     document.querySelectorAll('.grid').forEach(grid => {
         grid.classList.add('hidden');
     });
-    document.querySelectorAll('.tab').forEach(tab => {
+    document.querySelectorAll('button').forEach(tab => {
         tab.classList.remove('active');
     });
 
