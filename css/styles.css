@@ -36,6 +36,7 @@ button {
     cursor: pointer;
     color: black;
     width: 100%;
+    padding: 0.15rem 0.5rem;
 }
 
 .container {
@@ -48,7 +49,7 @@ button {
     margin: 0 auto;
     box-sizing: border-box;
     width: 100%;
-    min-width: 250px;
+    min-width: 150px;
 }
 
 .totalField {
@@ -107,7 +108,6 @@ button {
 }
 
 .grid button {
-    padding: 6px;
     padding-left: 0px;
     padding-right: 0px;
     background-color: #509f997f;
@@ -132,12 +132,12 @@ button {
     box-sizing: border-box;
     margin: auto auto;
     width: 100%;
-    min-width: 250px;
+    min-width: 150px;
 }
 
 .fixedButtons button {
     flex: 1;
-    padding: 15px;
+    padding: 1rem 1rem;
 }
 
 .fixedButtons .action-buttons {
@@ -163,16 +163,6 @@ button {
     }
 }
 
-.button-green {
-    background-color: #6d8a4dde;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .button-green:hover {
-        background-color: #4A8700;
-    }
-}
-
 .button-red {
     background-color: #953d41c2;
 }
@@ -180,6 +170,16 @@ button {
 @media (hover: hover) and (pointer: fine) {
     .button-red:hover {
         background-color: #870007;
+    }
+}
+
+.button-green {
+    background-color: #6d8a4dde;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .button-green:hover {
+        background-color: #4A8700;
     }
 }
 
