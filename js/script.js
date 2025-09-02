@@ -109,7 +109,7 @@ function createPfandButton(pfandList) {
     } else if (pfandList.length === 1) {
         if (parseFloat(pfandList[0].price) > 0) {
             pfandButtonItem.innerHTML = `
-            Pfand zurück <br>(${parseFloat(pfandList[0].price).toFixed(2)} €)
+            Pfand zurück (${parseFloat(pfandList[0].price).toFixed(2)} €)
             `;
             pfandButtonItem.onclick = () => addItem('Pfand ' + pfandList[0].name, -parseFloat(pfandList[0].price), 0);
         } else {
@@ -136,7 +136,7 @@ function showSubmenu(name, submenuOptions) {
         submenuDiv.appendChild(submenuTitle);
         submenuOptions.forEach(option => {
             const submenuButton = document.createElement('button');
-            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)}€)`;
+            submenuButton.innerText = `${option.name} (${option.price.toFixed(2)}€)`;
             submenuButton.onclick = () => {
                 addItem(name + ' ' + option.name, -parseFloat(option.price), 0);
                 // closeSubmenu();  // Closes submenus after selection
