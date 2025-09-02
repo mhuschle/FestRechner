@@ -102,6 +102,7 @@ button {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
+    border-radius: 8px;
 }
 
 .grid button {
