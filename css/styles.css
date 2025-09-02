@@ -29,7 +29,7 @@ body {
 
 button {
     border-style: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: bold;
     font-size: clamp(2.4dvh, 2.5dvh, 2.7dvh);
     word-wrap: break-word;
@@ -146,19 +146,15 @@ button {
 
 .fixedButtons button {
     flex: 1;
-    padding: 1rem 1rem;
+    padding: 1.2rem 1rem;
 }
 
-.fixedButtons .action-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 5px;
-}
-
-@media (min-width: 300px) {
+@media (min-width: 320px) {
     .fixedButtons .action-buttons {
+        display: flex;
         flex-direction: row;
+        justify-content: space-around;
+        gap: 5px;
     }
 }
 
