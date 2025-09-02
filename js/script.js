@@ -15,8 +15,8 @@ async function loadConfig() {
 loadConfig().then(settings => {
     document.title = settings.appName + " - " + settings.version;
     document.getElementById('header').innerHTML = `
-    <span style="font-weight: bold; font-size: 3.5vh;">${settings.appName}</span>
-    <span style="font-weight: normal; font-size: 2vh;"> - ${settings.version}</span>
+    <span style="font-weight: bold; font-size: 3.5dvh;">${settings.appName}</span>
+    <span style="font-weight: normal; font-size: 2dvh;"> - ${settings.version}</span>
     `;
     createPfandButton(settings.pfand);
 });

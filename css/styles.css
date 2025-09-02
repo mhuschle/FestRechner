@@ -8,13 +8,13 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
 }
 
 .title-container {
     flex: 0 0 36px;
     min-height: 36px;
-    font-size: 3.5vh;
+    font-size: 3.5dvh;
     margin-top: 2px;
     margin-bottom: 10px;
     color: #101e1d;
@@ -30,7 +30,7 @@ button {
     border-style: none;
     border-radius: 8px;
     font-weight: bold;
-    font-size: clamp(2.4vh, 2.5vh, 2.7vh);
+    font-size: clamp(2.4dvh, 2.5dvh, 2.7dvh);
     word-wrap: break-word;
     cursor: pointer;
     color: black;
@@ -52,7 +52,7 @@ button {
 
 .totalField {
     height: 6%;
-    font-size: clamp(3vh, 3.5vh, 4vh);
+    font-size: clamp(3dvh, 3.5dvh, 4dvh);
     margin: 10px;
     color: #153633;
     display: flex;
@@ -216,7 +216,7 @@ button {
 }
 
 .submenu-title {
-    font-size: 3.5vh;
+    font-size: 3.5dvh;
     font-weight: bold;
     word-wrap: break-word;
     margin-top: 5px;
@@ -230,5 +230,5 @@ button {
     padding-right: 0px;
     background-color: #509f997f;
     box-sizing: border-box;
-    min-height: 9vh;
+    min-height: 9dvh;
 }
