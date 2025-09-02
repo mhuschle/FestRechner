@@ -1,7 +1,6 @@
 {
     "name": "FestRechner",
     "short_name": "FestRechner",
-    "start_url": "/index.html",
     "display": "standalone",
     "icons": [
         {
