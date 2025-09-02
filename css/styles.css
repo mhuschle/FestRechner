@@ -51,9 +51,9 @@ button {
 }
 
 .totalField {
-    height: 6%;
+    height: 5%;
     font-size: clamp(3dvh, 3.5dvh, 4dvh);
-    margin: 10px;
+    margin: 6px;
     color: #153633;
     display: flex;
     justify-content: space-evenly;
@@ -74,7 +74,7 @@ button {
 .tabContainer button {
     flex: 0 0 auto;
     cursor: pointer;
-    padding: 8px;
+    padding: 8px auto;
     font-weight: bold;
     background-color: #509f98;
     color: white;
@@ -97,7 +97,7 @@ button {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 3px;
-    height: 82%;
+    height: 80%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
