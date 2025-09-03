@@ -14,7 +14,7 @@ async function loadConfig() {
 
 loadConfig().then(settings => {
     document.getElementById('header').innerHTML = `
-    <span style="font-weight: bold; font-size: 3.5dvh;">FestRechner</span>
+    <span style="font-weight: bold; font-size: 3.5svh;">FestRechner</span>
     <span style="font-weight: normal;"> - ${settings.version}</span>
     `;
     createPfandButton(settings.pfand);

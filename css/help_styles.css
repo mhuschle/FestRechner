@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    font-size: 2dvh;
+    font-size: 2svh;
     margin: auto auto;
     padding: 4px;
     background-color: #d4e7e4;
@@ -9,7 +9,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100dvh;
+    height: 100svh;
     word-wrap: break-word;
 }
 
