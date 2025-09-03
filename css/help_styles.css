@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 2dvh;
+    margin: auto auto;
+    padding: 4px;
+    background-color: #d4e7e4;
+    box-sizing: border-box;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    word-wrap: break-word;
+}
+
+a {
+    margin: 10px auto;
+}
+
+.container {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px #003435;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 150px;
+    margin-bottom: 4px;
+    text-align: left;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
+.container h1 {
+    text-align: center;
+    color: #003435;
+}
