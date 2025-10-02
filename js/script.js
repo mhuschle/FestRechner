@@ -108,14 +108,14 @@ function createPfandButton(pfandList) {
     } else if (pfandList.length === 1) {
         if (parseFloat(pfandList[0].price) > 0) {
             pfandButtonItem.innerHTML = `
-            Pfand zurück (${parseFloat(pfandList[0].price).toFixed(2)} €)
+            Pfand (${parseFloat(pfandList[0].price).toFixed(2)} €)
             `;
             pfandButtonItem.onclick = () => addItem('Pfand ' + pfandList[0].name, -parseFloat(pfandList[0].price), 0);
         } else {
             pfandButtonItem.style.display = 'none';
         }
     } else if (pfandList.length > 1) {
-        pfandButtonItem.innerText = `Pfand zurück\n(Untermenü)`;
+        pfandButtonItem.innerText = `Pfand\n(Untermenü)`;
         pfandButtonItem.onclick = () => showSubmenu('Pfand', pfandList);
     }
 }
@@ -137,7 +137,7 @@ function showSubmenu(name, submenuOptions) {
             const submenuButton = document.createElement('button');
             submenuButton.innerText = `${option.name} (${option.price.toFixed(2)}€)`;
             submenuButton.onclick = () => {
-                addItem(name + ' ' + option.name, -parseFloat(option.price), 0);
+                addItem(name + ' - ' + option.name, parseFloat(option.price), 0);
                 // closeSubmenu();  // Closes submenus after selection
             };
             submenuDiv.appendChild(submenuButton);
@@ -153,7 +153,7 @@ function showSubmenu(name, submenuOptions) {
                 submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
             }
             submenuButton.onclick = () => {
-                addItem(name + ' ' + option.name, option.price, option.pfand);
+                addItem(name + ' - ' + option.name, option.price, option.pfand);
                 // closeSubmenu();  // Closes submenus after selection
             };
             submenuDiv.appendChild(submenuButton);

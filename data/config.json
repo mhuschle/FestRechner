@@ -4,6 +4,19 @@
         {
             "name": "Gläser/Flaschen",
             "price": 2.00
+        },
+        {
+            "name": "Zurück Gläser/Flaschen",
+            "price": -2.00
+        },
+        {
+            "name": "Likörmeter",
+            "price": 10.00
+        },
+        {
+            "name": "Zurück Likörmeter",
+            "price": -10.00
         }
+
     ]
 }
