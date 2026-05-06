@@ -23,7 +23,7 @@ loadConfig().then(settings => {
 async function loadProducts() {
     const response = await fetch('data/products.json');
     if (!response.ok) {
-        throw new Error('Could not import config.');
+        throw new Error('Could not import products.');
     }
     const products = await response.json();
     const normalized = normalizeProducts(products); // <- Hier wird normalisiert
