@@ -78,64 +78,96 @@
     ],
     "food": [
         {
-            "name": "",
-            "price": 
-        },
-        {
-            "name": "",
-            "price": 
-        },
-        {
-            "name": "",
-            "price": 
-        },
-        {
-            "name": "",
-            "price": 
-        },
-        {
             "name": "Wurst-/Käseweck",
-            "price": 3.00
+            "price": 3.50
         },
         {
-            "name": "Pommes",
-            "price": 3.00
+            "name": "Currywurst mit Weck",
+            "price": 5.00
         },
         {
-            "name": "Brezel",
-            "price": 1.50
+            "name": "Grillwurst im Weck",
+            "price": 4.50
         },
         {
-            "name": "1 Paar Weißwürste mit Brezel",
-            "price": 5.50
+            "name": "Grillwurst mit Kartoffelsalat",
+            "price": 6.50
         },
         {
-            "name": "Fleischkäse mit Pommes",
-            "price": 7.50
+            "name": "Putensteak im Weck",
+            "price": 6.50
         },
         {
-            "name": "Fleischkäse im Weck",
-            "price": 5.50
+            "name": "Putensteak mit Kartoffelsalat",
+            "price": 8.50
         },
         {
-            "name": "Gemüseküchele mit Pommes",
-            "price": 7.50
+            "name": "Schweinesteak im Weck",
+            "price": 6.50
+        },
+        {
+            "name": "Schweinesteak mit Kartoffelsalat",
+            "price": 8.50
         },
         {
             "name": "Gemüseküchele im Weck",
-            "price": 5.50
+            "price": 4.50
         },
         {
-            "name": "Einzelner Weck",
-            "price": 1.00
+            "name": "Gemüseküchele mit Kartoffelsalat",
+            "price": 6.50
         }
     ],
     "etc": [
         {
+            "name": "Eiskaffee/Eisschokolade",
+            "price": 6.00
+        },
+        {
+            "name": "Waffel mit Puderzucker",
+            "price": 2.00
+        },
+        {
+            "name": "Schleckeis"
+            "price": 1.50
+        },
+        {
+            "name": "Bolle Eis"
+            "submenu": [
+                {
+                    "name": "1 Kugel Eis OHNE Sahne",
+                    "price": 1.00
+                },
+                {
+                    "name": "1 Kugel Eis MIT Sahne",
+                    "price": 1.50
+                },
+                {
+                    "name": "2 Kugel Eis OHNE Sahne",
+                    "price": 2.00
+                },
+                {
+                    "name": "2 Kugel Eis MIT Sahne",
+                    "price": 2.50
+                },
+                {
+                    "name": "3 Kugel Eis OHNE Sahne",
+                    "price": 3.00
+                },
+                {
+                    "name": "3 Kugel Eis MIT Sahne",
+                    "price": 3.50
+                }
+            ]
+        },
+        {
+            "name": "Portion Sahne",
+            "price": 0.50
+        },
+        {
             "name": "Einzelner Weck",
             "price": 1.50
         },
-
         {
             "name": "Einzelnes Steak",
             "price": 5.00
@@ -145,36 +177,8 @@
             "price": 3.00
         },
         {
-            "name": "Gemüsemockel",
+            "name": "Einzelner Gemüsemockel",
             "price": 3.00
-        },
-        {
-            "name": "1 Kugel Eis OHNE Sahne",
-            "price": 1.00
-        },
-        {
-            "name": "1 Kugel Eis MIT Sahne",
-            "price": 1.50
-        },
-        {
-            "name": "2 Kugel Eis OHNE Sahne",
-            "price": 2.00
-        },
-        {
-            "name": "2 Kugel Eis MIT Sahne",
-            "price": 2.50
-        },
-        {
-            "name": "3 Kugel Eis OHNE Sahne",
-            "price": 3.00
-        },
-        {
-            "name": "3 Kugel Eis MIT Sahne",
-            "price": 3.50
-        },
-        {
-            "name": "Portion Sahne",
-            "price": 0.50
         }
     ]
 }
