@@ -2,22 +2,22 @@
     "drinks": [
         {
             "name": "Alpi Bier - Mönch",
-            "price": 10.00
+            "price": 3.00
         },
         {
             "name": "Alpi Radler",
-            "price": 5.00
+            "price": 3.00
         },
         {
             "name": "Weißwein Müller Thurgau",
             "submenu": [
                 {
                     "name": "Flasche 1.0l",
-                    "price": 12.00
+                    "price": 13.00
                 },
                 {
                     "name": "Glas 0.25l",
-                    "price": 4.00
+                    "price": 3.50
                 }
             ]
         },
@@ -30,30 +30,30 @@
                 },
                 {
                     "name": "Glas 0.25l",
-                    "price": 4.50
+                    "price": 3.50
                 }
             ]
         },
         {
             "name": "Weinschorle 0.25l",
-            "price": 3.50
+            "price": 3.00
         },
         {
             "name": "Sommerschorle",
             "submenu": [
                 {
                     "name": "mit alk",
-                    "price": 13.00
+                    "price": 5.50
                 },
                 {
                     "name": "alkoholfrei",
-                    "price": 5.50
+                    "price": 6.00
                 }
             ]
         },
         {
             "name": "Wildberry Lillet",
-            "price": 3.50
+            "price": 6.00
         },
         {
             "name": "Sprudel 0.5l",
@@ -73,9 +73,10 @@
         },
         {
             "name": "Topfit",
-            "price": 2.50
+            "price": 3.50
         }
     ],
+    
     "food": [
         {
             "name": "Wurst-/Käseweck",
@@ -118,6 +119,7 @@
             "price": 6.50
         }
     ],
+    
     "etc": [
         {
             "name": "Eiskaffee/Eisschokolade",
