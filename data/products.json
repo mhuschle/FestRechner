@@ -1,47 +1,23 @@
 {
     "drinks": [
         {
-            "name": "Bier/Radler",
-            "submenu": [
-                {
-                    "name": "Maß 1.0l",
-                    "price": 10.00,
-                    "pfand": 2.00
-                },
-                {
-                    "name": "Krug 0.4l",
-                    "price": 5.00,
-                    "pfand": 2.00
-                }
-            ]
+            "name": "Alpi Bier - Mönch",
+            "price": 10.00
         },
         {
-            "name": "Weizen",
-            "submenu": [
-                {
-                    "name": "Maß 1.0l",
-                    "price": 10.00,
-                    "pfand": 2.00
-                },
-                {
-                    "name": "Krug 0.4l",
-                    "price": 5.00,
-                    "pfand": 2.00
-                }
-            ]
+            "name": "Alpi Radler",
+            "price": 5.00
         },
         {
             "name": "Weißwein Müller Thurgau",
             "submenu": [
                 {
                     "name": "Flasche 1.0l",
-                    "price": 12.00,
-                    "pfand": 2.00
+                    "price": 12.00
                 },
                 {
                     "name": "Glas 0.25l",
-                    "price": 4.00,
-                    "pfand": 2.00
+                    "price": 4.00
                 }
             ]
         },
@@ -50,65 +26,54 @@
             "submenu": [
                 {
                     "name": "Flasche 1.0l",
-                    "price": 13.00,
-                    "pfand": 2.00
+                    "price": 13.00
                 },
                 {
                     "name": "Glas 0.25l",
-                    "price": 4.50,
-                    "pfand": 2.00
+                    "price": 4.50
                 }
             ]
         },
         {
-            "name": "Weinschorle",
+            "name": "Weinschorle 0.25l",
+            "price": 3.50
+        },
+        {
+            "name": "Sommerschorle",
             "submenu": [
                 {
-                    "name": "Maß 1.0l",
-                    "price": 11.00,
-                    "pfand": 2.00
+                    "name": "mit alk",
+                    "price": 13.00
                 },
                 {
-                    "name": "Krug 0.4l",
-                    "price": 5.50,
-                    "pfand": 2.00
-                },
-                {
-                    "name": "Glas 0.25l",
-                    "price": 3.50,
-                    "pfand": 2.00
+                    "name": "alkoholfrei",
+                    "price": 5.50
                 }
             ]
+        },
+        {
+            "name": "Wildberry Lillet",
+            "price": 3.50
+        },
+        {
+            "name": "Sprudel 0.5l",
+            "price": 2.50
         },
         {
             "name": "Cola/Fanta",
-            "price": 3.00,
-            "pfand": 2.00
+            "price": 3.00
         },
         {
-            "name": "Spezi",
-            "price": 3.50,
-            "pfand": 2.00
+            "name": "Johannesbeerschorle",
+            "price": 3.50
         },
         {
             "name": "Apfelschorle",
-            "price": 3.50,
-            "pfand": 2.00
+            "price": 3.50
         },
         {
-            "name": "Sprudel",
-            "submenu": [
-                {
-                    "name": "Groß 0.7l",
-                    "price": 3.00,
-                    "pfand": 2.00
-                },
-                {
-                    "name": "Klein 0.5l",
-                    "price": 2.50,
-                    "pfand": 2.00
-                }
-            ]
+            "name": "Topfit",
+            "price": 2.50
         }
     ],
     "food": [
@@ -183,7 +148,7 @@
         },
         {
             "name": "Pfand Rückgabe Likör Meter",
-            "price": -10.00
+            "price": -10.
         }
     ]
 }
