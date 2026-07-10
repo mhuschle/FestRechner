@@ -78,6 +78,22 @@
     ],
     "food": [
         {
+            "name": "",
+            "price": 
+        },
+        {
+            "name": "",
+            "price": 
+        },
+        {
+            "name": "",
+            "price": 
+        },
+        {
+            "name": "",
+            "price": 
+        },
+        {
             "name": "Wurst-/Käseweck",
             "price": 3.00
         },
@@ -116,39 +132,49 @@
     ],
     "etc": [
         {
-            "name": "Lebkuchenherzle",
-            "price": 4.00
+            "name": "Einzelner Weck",
+            "price": 1.50
+        },
+
+        {
+            "name": "Einzelnes Steak",
+            "price": 5.00
         },
         {
-            "name": "Mischgetränk 0.2l",
-            "price": 6.00,
-            "pfand": 2.00
+            "name": "Einzelne Grillwurst",
+            "price": 3.00
         },
         {
-            "name": "Mischgetränk 0.4l",
-            "price": 11.00,
-            "pfand": 2.00
+            "name": "Gemüsemockel",
+            "price": 3.00
         },
         {
-            "name": "Bachwasser",
-            "price": 4.50
+            "name": "1 Kugel Eis OHNE Sahne",
+            "price": 1.00
         },
         {
-            "name": "Likör Shot",
+            "name": "1 Kugel Eis MIT Sahne",
             "price": 1.50
         },
         {
-            "name": "Likör Flasche",
-            "price": 75.00
+            "name": "2 Kugel Eis OHNE Sahne",
+            "price": 2.00
         },
         {
-            "name": "Likör Meter",
-            "price": 14.00,
-            "pfand": 10.00
+            "name": "2 Kugel Eis MIT Sahne",
+            "price": 2.50
         },
         {
-            "name": "Pfand Rückgabe Likör Meter",
-            "price": -10.
+            "name": "3 Kugel Eis OHNE Sahne",
+            "price": 3.00
+        },
+        {
+            "name": "3 Kugel Eis MIT Sahne",
+            "price": 3.50
+        },
+        {
+            "name": "Portion Sahne",
+            "price": 0.50
         }
     ]
 }
