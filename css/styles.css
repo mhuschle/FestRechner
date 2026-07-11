@@ -3,6 +3,7 @@
     --header-height: 1.5em;
     --footer-height: 6.0em;
     --element-padding: 5px;
+    --border-radius: 12px;
     --panel-color: #ffffff;
     --accent-color: #509f98;
     --accent-strong: #0a3330;
@@ -31,7 +32,7 @@ h1, h2 {
 /* ===== Buttons ===== */
 button {
     border: 1px solid var(--accent-max);
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     font-weight: 600;
     font-size: 1.05em;
     white-space: normal;
@@ -119,7 +120,7 @@ a {
     min-height: 0;
     width: 100%;
     padding: var(--element-padding);
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     background-color: var(--panel-color);
     box-shadow: 0 0 15px var(--accent-max);
     flex-direction: column;
@@ -171,10 +172,9 @@ a {
 
 .grid button {
     width: 98%;
-    min-height: max-content;
+    min-height: 3.0em;
     height: 100%;
     box-sizing: border-box;
-    margin: 0.5em 0.2em;
     color: var(--text-color);
     justify-content: space-evenly;
 }
@@ -235,7 +235,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     background-color: var(--panel-color);
     box-shadow: 0 0 15px var(--accent-max);
     z-index: 10;
