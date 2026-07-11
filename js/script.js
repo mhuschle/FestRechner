@@ -321,10 +321,19 @@ function showTab(tabName) {
     const activeTab = document.getElementById(`${targetTab}Tab`);
 
     if (activeGrid) activeGrid.classList.remove('hidden');
-    if (activeTab) activeTab.classList.add('active');
+    if (activeTab) {
+        activeTab.classList.add('active');
+        const tabContainer = document.getElementById('tabContainer');
+        if (tabContainer) {
+            activeTab.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+        }
+    }
 
     activeCategory = targetTab;
-    document.getElementById('mainPage').scrollIntoView({ behavior: 'smooth' });
 }
 
 function initSwipeNavigation() {
