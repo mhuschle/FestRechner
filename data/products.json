@@ -215,8 +215,29 @@
         "items": [
             {
                 "name": "Test Item 2",
-                "price": 2.00,
-                "pfand": 2.00
+                "submenu": [
+                    {
+                        "name": "Test Item 2.1",
+                        "price": 2.50,
+                        "pfand": 2.00
+                    },
+                    {
+                        "name": "Test Item 2.2",
+                        "pfand": 2.00,
+                        "submenu": [
+                            {
+                                "name": "Test Item 2.2.1",
+                                "price": 3.00,
+                                "pfand": 2.00
+                            },
+                            {
+                                "name": "Test Item 2.2.2",
+                                "price": 3.50,
+                                "pfand": 2.00
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

@@ -72,7 +72,16 @@ function normalizeItem(item) {
         submenu
     } = item;
 
+    const hasSubmenu = Array.isArray(item.submenu);
+    const hasPrice = Object.prototype.hasOwnProperty.call(item, 'price');
+    const hasPfand = Object.prototype.hasOwnProperty.call(item, 'pfand');
+
     const normalized = { name, price, pfand };
+    
+    if (hasSubmenu && (hasPrice || hasPfand)) {
+        console.error(`Ungültiger Eintrag: "${item.name}" darf nicht gleichzeitig submenu und price/pfand haben.`);
+        return null;
+    }
 
     if (submenu && Array.isArray(submenu)) {
         normalized.submenu = submenu.map(sub => normalizeItem(sub));
