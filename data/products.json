@@ -191,10 +191,10 @@
         ]
     },
     "test": {
-        "label": "Test",
+        "label": "Test0",
         "items": [
             {
-                "name": "Test Item 1",
+                "name": "Test Item 0",
                 "price": 0.00,
                 "pfand": 2.00
             }
@@ -214,7 +214,7 @@
         "label": "Test2",
         "items": [
             {
-                "name": "Test Item 1",
+                "name": "Test Item 2",
                 "price": 2.00,
                 "pfand": 2.00
             }

@@ -41,18 +41,24 @@ function normalizeProducts(products) {
         const value = products[category];
 
         if (Array.isArray(value)) {
-            normalized[category] = {
-                label: formatCategoryName(category),
-                items: value.map(item => normalizeItem(item))
-            };
-        } else if (value && typeof value === 'object' && Array.isArray(value.items)) {
-            normalized[category] = {
-                label: value.label || formatCategoryName(category),
-                items: value.items.map(item => normalizeItem(item))
-            };
-        } else {
-            console.warn(`Kategorie "${category}" hat ein unbekanntes Format.`);
+            console.warn(`Kategorie "${category}" hat kein Label. Bitte füge in products.json ein Label hinzu.`);
+            continue;
         }
+
+        if (!value || typeof value !== 'object' || !Array.isArray(value.items)) {
+            console.warn(`Kategorie "${category}" hat ein unbekanntes Format.`);
+            continue;
+        }
+
+        if (typeof value.label !== 'string' || value.label.trim() === '') {
+            console.warn(`Kategorie "${category}" hat kein gültiges Label. Bitte prüfe products.json.`);
+            continue;
+        }
+
+        normalized[category] = {
+            label: value.label,
+            items: value.items.map(item => normalizeItem(item))
+        };
     }
 
     return normalized;
