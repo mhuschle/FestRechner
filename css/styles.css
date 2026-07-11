@@ -1,52 +1,49 @@
+/* ===== Basis und Theme ===== */
+:root {
+    --header-height: 1.5em;
+    --footer-height: 6.0em;
+    --element-padding: 5px;
+    --panel-color: #ffffff;
+    --accent-color: #509f98;
+    --accent-strong: #0a3330;
+--accent-max: #000000;
+    --text-color: #0f2323;
+}
+
 body {
     font-family: Arial, sans-serif;
-    font-size: 2.2svh;
-    margin: auto auto;
-    padding: 4px;
-    background-color: #d4e7e4;
+        margin: 0;
+    padding: 0.5em;
+    background: linear-gradient(0deg, var(--panel-color) 20%, var(--accent-color) 70%);
+;
     box-sizing: border-box;
     text-align: center;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     height: 100svh;
+    color: var(--text-color);
 }
 
-a {
-    margin: 6px;
+h1, h2 {
+    font-size: 1.3rem
 }
 
-.linkedTitle {
-    cursor: pointer;
-    color: #003435;
-    text-decoration: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    flex: 0 0 36px;
-    min-height: 36px;
-}
-
-.highlight {
-    background-color: #a9cecaa7;
-}
-
+/* ===== Buttons ===== */
 button {
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 14px;
+    border: 1px solid var(--accent-max);
+    border-radius: 12px;
     font-weight: 800;
-    font-size: clamp(1.05rem, 2.35svh, 1.4rem);
-    line-height: 1.15;
-    white-space: normal;
+        white-space: normal;
     word-wrap: break-word;
     overflow-wrap: anywhere;
     hyphens: auto;
     text-align: center;
     cursor: pointer;
-    color: #0f2323;
     width: 100%;
-    padding: 0.5rem 0.7rem;
-    min-height: clamp(2.9rem, 6.2svh, 4rem);
-    display: inline-flex;
+    padding: var(--element-padding);
+gap: var(--element-padding);
+        display: inline-flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -3px 6px rgba(0, 0, 0, 0.08);
@@ -58,180 +55,183 @@ button {
 button:active {
     transform: translateY(1px) scale(0.98);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.12);
+    background-color: color-mix(in srgb, var(--accent-color) 80%, var(--accent-max));
 }
 
+button:hover,
 button:focus-visible {
-    outline: 2px solid #0a3330;
-    outline-offset: 2px;
+    outline: 2px solid var(--accent-strong);
+background-color: color-mix(in srgb, var(--accent-color) 80%, var(--accent-max));
 }
 
-.container {
+/* ===== Gemeinsamer Shell-Aufbau ===== */
+.app-shell {
+display: flex;
     flex: 1;
     min-height: 0;
-    padding: 5px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 0 15px #003435;
-    margin: 0 auto;
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 150px;
+        flex-direction: column;
+    gap: 2px;
+}
+.app-header {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    height: var(--header-height);
+    }
+
+.app-main {
+display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+        flex-direction: column;
+}
+
+.app-footer {
+display: flex;
+    flex: 0 0 auto;
+        height: var(--footer-height);
+            }
+
+/* ===== header content ===== */
+a {
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    }
+
+/* ===== main content ===== */
+.page {
+    display: none;
+    flex: 1;
+    min-height: 0;
+    padding: var(--element-padding);
+    }
+
+.page.is-active {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-pane {
+display: flex;
+    flex: 1;
+box-sizing: border-box;
+    min-height: 0;
+width: 100%;
+    padding: var(--element-padding);
+    border-radius: 12px;
+    background-color: var(--panel-color);
+    box-shadow: 0 0 15px var(--accent-max);
+                    flex-direction: column;
+    overflow: hidden;
+}
+
+.tab-container {
+    display: flex;
+    justify-content: space-around;
+    flex: 0 0 auto;
+    min-height: 8%;
+    margin-bottom: 5px;
+        overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+}
+
+.tab-container button {
+    flex: 1 1 auto;
+    min-width: 100px;
+    margin: 0 2px;
+}
+
+.product-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
 }
 
 .totalField {
-    height: 5%;
-    font-size: clamp(3svh, 3.5svh, 4svh);
-    margin: 6px auto;
-    color: #153633;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.tabContainer {
-    display: flex;
-    justify-content: space-around;
-    height: 8%;
-    margin-bottom: 5px;
-    column-gap: 2px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: #888 transparent;
-}
-
-.tabContainer button {
-    flex: 1 1 0;
-    min-width: min(110px, 100%);
-    cursor: pointer;
-    padding: 0.5rem 0.7rem;
-    font-size: clamp(0.95rem, 2.1svh, 1.2rem);
-    font-weight: 800;
-    background: linear-gradient(135deg, #509f98 0%, #67b2ab 100%);
-    color: white;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -3px 6px rgba(0, 0, 0, 0.14);
-    white-space: normal;
-    overflow-wrap: anywhere;
-}
-
-.tabContainer button:hover,
-.tabContainer button:focus-visible {
-    background: linear-gradient(135deg, #153633 0%, #2b6460 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -3px 6px rgba(0, 0, 0, 0.16);
-}
-
-.tabContainer button.active {
-    background: linear-gradient(135deg, #0a3330 0%, #16504c 100%);
-    border: 2px solid #0c1b1a;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 5px 12px rgba(0, 0, 0, 0.25);
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 3px;
-    height: 100%;
-    max-height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: #888 transparent;
-    border-radius: 8px;
-}
-
-.grid button {
-    padding-left: 0px;
-    padding-right: 0px;
-    background: linear-gradient(145deg, rgba(80, 159, 153, 0.8) 0%, rgba(80, 159, 153, 0.95) 100%);
-    box-sizing: border-box;
-    min-height: clamp(3rem, 8svh, 4.4rem);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.26), inset 0 -3px 6px rgba(0, 0, 0, 0.12);
-    transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .grid button:hover,
-    .grid button:focus-visible {
-        background: linear-gradient(145deg, #16504c 0%, #1f6661 100%);
-        transform: translateY(-1px);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.26), inset 0 -3px 6px rgba(0, 0, 0, 0.14);
-    }
-}
-
-.scrollableSummary {
-    max-height: 80%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: #888 transparent;
-    border-radius: 8px;
-}
-
-.fixedButtons {
+display: flex;
     flex: 0 0 auto;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 0 15px #003435;
+box-sizing: border-box;
+    font-size: 1.7em;
+    margin: 0.5em 0.2em;
+    color: var(--text-color);
+        justify-content: space-evenly;
+}
+
+.text-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding: 5px;
-    box-sizing: border-box;
-    margin: auto auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+    text-align: left;
+}
+/* ===== footer content ===== */
+.fixedButtons {
+    display: flex;
+        align-items: center;
+    gap: var(--element-padding);
     width: 100%;
-    min-width: 150px;
 }
 
 .fixedButtons button {
     flex: 1;
-    padding: 1.2rem 1rem;
+height: 100%;
+font-size: 1.2em;
 }
 
-@media (min-width: 320px) {
-    .fixedButtons .action-buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        gap: 5px;
-    }
+.fixedButtons .button-red {
+    background-color: rgba(209, 40, 40, 0.5);
+    color: var(--text-color);
 }
 
-.button-purple {
-    background-color: #634686c3;
+.fixedButtons .button-green {
+    background-color: rgba(35, 109, 35, 0.5);
+    color: var(--text-color);
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .button-purple:hover {
-        background-color: #3D0087;
-    }
+.fixedButtons .button-purple {
+    background-color: rgba(107, 44, 107, 0.5);
+    color: var(--text-color);
 }
 
-.button-red {
-    background-color: #953d41c2;
+/* ===== helpers and submenu ===== */
+.submenu {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 12px;
+    background-color: var(--panel-color);
+    box-shadow: 0 0 15px var(--accent-max);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 200px;
+    width: 80%;
+    justify-content: center;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .button-red:hover {
-        background-color: #870007;
-    }
+.submenu-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--text-color);
 }
 
-.button-green {
-    background-color: #6d8a4dde;
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .button-green:hover {
-        background-color: #4A8700;
-    }
-}
-
+/* ===== helpers and submenu ===== */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .overlay {
@@ -243,68 +243,4 @@ button:focus-visible {
     background-color: rgba(0, 0, 0, 0.9);
     display: none;
     z-index: 5;
-}
-
-.submenu {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: 0 0 15px #003435;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: auto;
-    min-height: 200px;
-    width: 80%;
-    justify-content: center;
-}
-
-.submenu-title {
-    font-size: 3.5svh;
-    font-weight: bold;
-    word-wrap: break-word;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    color: #101e1d;
-}
-
-.submenu button {
-    padding: 4px;
-    padding-left: 0px;
-    padding-right: 0px;
-    background: linear-gradient(145deg, rgba(80, 159, 153, 0.8) 0%, rgba(80, 159, 153, 0.95) 100%);
-    box-sizing: border-box;
-    min-height: clamp(3rem, 9svh, 4rem);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.26), inset 0 -3px 6px rgba(0, 0, 0, 0.12);
-}
-
-@media (max-width: 480px) {
-    button {
-        font-size: clamp(1rem, 3.2vw, 1.2rem);
-        padding: 0.45rem 0.55rem;
-        min-height: clamp(2.5rem, 7svh, 3.2rem);
-        border-radius: 12px;
-    }
-
-    .tabContainer {
-        min-height: 44px;
-        height: auto;
-    }
-
-    .tabContainer button {
-        padding: 0.45rem 0.55rem;
-        min-height: 2.9rem;
-        font-size: clamp(0.95rem, 3vw, 1.1rem);
-    }
-
-    .grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 4px;
-    }
 }
