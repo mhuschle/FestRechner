@@ -321,7 +321,7 @@ function showTab(tabName) {
     document.querySelectorAll('.grid').forEach(grid => {
         grid.classList.add('hidden');
     });
-    document.querySelectorAll('.tabContainer button').forEach(tab => {
+    document.querySelectorAll('.tab-container button').forEach(tab => {
         tab.classList.remove('active');
     });
 
