@@ -1,7 +1,12 @@
 let total = 0;
 let order = {};
-let lastAddedItem = null;  // Variable to save last added item
-updateTotal('totalSum');   // Write text with initial total=0 
+let lastAddedItem = null;
+let activeCategory = null;
+let categories = [];
+let touchStartX = 0;
+let touchEndX = 0;
+
+updateTotal('totalSum');
 
 async function loadConfig() {
     const response = await fetch('data/config.json');
@@ -26,15 +31,34 @@ async function loadProducts() {
         throw new Error('Could not import products.');
     }
     const products = await response.json();
-    const normalized = normalizeProducts(products); // <- Hier wird normalisiert
-    return normalized;
+    return normalizeProducts(products);
 }
 
 function normalizeProducts(products) {
     const normalized = {};
 
     for (const category in products) {
-        normalized[category] = products[category].map(item => normalizeItem(item));
+        const value = products[category];
+
+        if (Array.isArray(value)) {
+            console.warn(`Kategorie "${category}" hat kein Label. Bitte füge in products.json ein Label hinzu.`);
+            continue;
+        }
+
+        if (!value || typeof value !== 'object' || !Array.isArray(value.items)) {
+            console.warn(`Kategorie "${category}" hat ein unbekanntes Format.`);
+            continue;
+        }
+
+        if (typeof value.label !== 'string' || value.label.trim() === '') {
+            console.warn(`Kategorie "${category}" hat kein gültiges Label. Bitte prüfe products.json.`);
+            continue;
+        }
+
+        normalized[category] = {
+            label: value.label,
+            items: value.items.map(item => normalizeItem(item))
+        };
     }
 
     return normalized;
@@ -48,7 +72,16 @@ function normalizeItem(item) {
         submenu
     } = item;
 
+    const hasSubmenu = Array.isArray(item.submenu);
+    const hasPrice = Object.prototype.hasOwnProperty.call(item, 'price');
+    const hasPfand = Object.prototype.hasOwnProperty.call(item, 'pfand');
+
     const normalized = { name, price, pfand };
+    
+    if (hasSubmenu && (hasPrice || hasPfand)) {
+        console.error(`Ungültiger Eintrag: "${item.name}" darf nicht gleichzeitig submenu und price/pfand haben.`);
+        return null;
+    }
 
     if (submenu && Array.isArray(submenu)) {
         normalized.submenu = submenu.map(sub => normalizeItem(sub));
@@ -60,15 +93,43 @@ function normalizeItem(item) {
 function createProductButtons() {
     loadProducts()
         .then(products => {
-            for (const category in products) {
-                const grid = document.getElementById(`${category}Grid`);
-                if (!grid) {
-                    console.warn(`Kein Grid für Kategorie "${category}" gefunden.`);
-                    continue;
+            categories = Object.keys(products);
+            const tabContainer = document.getElementById('tabContainer');
+            const gridContainer = document.getElementById('productGridContainer');
+
+            if (!tabContainer || !gridContainer) {
+                console.warn('Tab-Container oder Grid-Container fehlt.');
+                return;
+            }
+
+            tabContainer.innerHTML = '';
+            gridContainer.innerHTML = '';
+
+            categories.forEach(category => {
+                const categoryData = products[category];
+                const tabButton = document.createElement('button');
+                tabButton.id = `${category}Tab`;
+
+                if (!categoryData.label) {
+                    console.warn(`Kategorie "${category}" hat kein Label. Bitte füge in products.json ein Label hinzu.`);
                 }
-                products[category].forEach(item => {
+                tabButton.innerText = categoryData.label;
+                tabButton.onclick = () => showTab(category);
+                tabContainer.appendChild(tabButton);
+
+                const grid = document.createElement('div');
+                grid.id = `${category}Grid`;
+                grid.className = 'grid hidden';
+                gridContainer.appendChild(grid);
+
+                categoryData.items.forEach(item => {
                     createSingleProductButton(item, grid);
                 });
+            });
+
+            if (categories.length > 0) {
+                showTab(categories[0]);
+                initSwipeNavigation();
             }
         })
         .catch(err => console.error('Fehler beim Laden der Produkte:', err));
@@ -121,9 +182,9 @@ function createPfandButton(pfandList) {
 }
 
 function showSubmenu(name, submenuOptions) {
-    closeSubmenu();  // Closes already opened submenus
+    closeSubmenu();
     const overlay = document.getElementById('overlay');
-    
+
     const submenuDiv = document.createElement('div');
     submenuDiv.className = 'submenu';
 
@@ -138,7 +199,6 @@ function showSubmenu(name, submenuOptions) {
             submenuButton.innerText = `${option.name} (${option.price.toFixed(2)}€)`;
             submenuButton.onclick = () => {
                 addItem(name + ' ' + option.name, -parseFloat(option.price), 0);
-                // closeSubmenu();  // Closes submenus after selection
             };
             submenuDiv.appendChild(submenuButton);
         });
@@ -154,7 +214,6 @@ function showSubmenu(name, submenuOptions) {
             }
             submenuButton.onclick = () => {
                 addItem(name + ' ' + option.name, option.price, option.pfand);
-                // closeSubmenu();  // Closes submenus after selection
             };
             submenuDiv.appendChild(submenuButton);
         });
@@ -182,7 +241,7 @@ function addItem(itemName, itemPrice, itemPfand) {
         };
     }
 
-    lastAddedItem = { name: itemName, price: itemPrice + itemPfand };  // Save last added item
+    lastAddedItem = { name: itemName, price: itemPrice + itemPfand };
     updateTotal('totalSum');
 }
 
@@ -190,7 +249,7 @@ function removeLastItem() {
     if (lastAddedItem && order[lastAddedItem.name]) {
         const item = order[lastAddedItem.name];
 
-        total -= lastAddedItem.price;  // Subtract price of the last added item
+        total -= lastAddedItem.price;
 
         if (item.count > 1) {
             item.count -= 1;
@@ -199,7 +258,7 @@ function removeLastItem() {
             delete order[lastAddedItem.name];
         }
 
-        lastAddedItem = null;  // Resets variable after deleting last order
+        lastAddedItem = null;
         updateTotal('totalSum');
     } else {
         alert('Es gibt keine Bestellung, die gelöscht werden kann.');
@@ -240,7 +299,7 @@ function backToOrder() {
     document.getElementById('mainPage').classList.remove('hidden');
     document.getElementById('mainButtons').classList.remove('hidden');
     document.getElementById('mainPage').scrollIntoView({ behavior: 'smooth' });
-    closeSubmenu();  // Closes all submenus
+    closeSubmenu();
 }
 
 function resetOrder() {
@@ -249,23 +308,80 @@ function resetOrder() {
 }
 
 function showTab(tabName) {
+    const targetTab = categories.includes(tabName) ? tabName : categories[0];
+
     document.querySelectorAll('.grid').forEach(grid => {
         grid.classList.add('hidden');
     });
-    document.querySelectorAll('button').forEach(tab => {
+    document.querySelectorAll('.tabContainer button').forEach(tab => {
         tab.classList.remove('active');
     });
 
-    const activeGrid = document.getElementById(`${tabName}Grid`);
-    const activeTab = document.getElementById(`${tabName}Tab`);
+    const activeGrid = document.getElementById(`${targetTab}Grid`);
+    const activeTab = document.getElementById(`${targetTab}Tab`);
 
     if (activeGrid) activeGrid.classList.remove('hidden');
-    if (activeTab) activeTab.classList.add('active');
+    if (activeTab) {
+        activeTab.classList.add('active');
+        const tabContainer = document.getElementById('tabContainer');
+        if (tabContainer) {
+            activeTab.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+        }
+    }
 
-    document.getElementById('mainPage').scrollIntoView({ behavior: 'smooth' });
+    activeCategory = targetTab;
 }
 
+function initSwipeNavigation() {
+    const swipeTarget = document.getElementById('mainPage');
+    if (!swipeTarget) {
+        return;
+    }
 
-// Create buttons dynamically
+    swipeTarget.addEventListener('touchstart', handleTouchStart, { passive: true });
+    swipeTarget.addEventListener('touchend', handleTouchEnd, { passive: true });
+}
+
+function handleTouchStart(event) {
+    if (event.touches.length !== 1) {
+        return;
+    }
+
+    touchStartX = event.touches[0].clientX;
+    touchEndX = touchStartX;
+}
+
+function handleTouchEnd(event) {
+    if (event.changedTouches.length !== 1) {
+        return;
+    }
+
+    touchEndX = event.changedTouches[0].clientX;
+    handleSwipeGesture();
+}
+
+function handleSwipeGesture() {
+    const swipeThreshold = 60;
+    const deltaX = touchEndX - touchStartX;
+
+    if (Math.abs(deltaX) < swipeThreshold || !activeCategory) {
+        return;
+    }
+
+    const currentIndex = categories.indexOf(activeCategory);
+    if (currentIndex === -1) {
+        return;
+    }
+
+    if (deltaX < 0 && currentIndex < categories.length - 1) {
+        showTab(categories[currentIndex + 1]);
+    } else if (deltaX > 0 && currentIndex > 0) {
+        showTab(categories[currentIndex - 1]);
+    }
+}
+
 createProductButtons();
-showTab('drinks');  // Set "drinks" tab first

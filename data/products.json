@@ -1,186 +1,198 @@
 {
-    "drinks": [
-        {
-            "name": "Alpi Bier - Mönch",
-            "price": 3.00
-        },
-        {
-            "name": "Alpi Radler",
-            "price": 3.00
-        },
-        {
-            "name": "Weißwein Müller Thurgau",
-            "submenu": [
-                {
-                    "name": "Flasche 1.0l",
-                    "price": 13.00
-                },
-                {
-                    "name": "Glas 0.25l",
-                    "price": 3.50
-                }
-            ]
-        },
-        {
-            "name": "Rotwein Spätburgunder",
-            "submenu": [
-                {
-                    "name": "Flasche 1.0l",
-                    "price": 13.00
-                },
-                {
-                    "name": "Glas 0.25l",
-                    "price": 3.50
-                }
-            ]
-        },
-        {
-            "name": "Weinschorle 0.25l",
-            "price": 3.00
-        },
-        {
-            "name": "Sommerschorle",
-            "submenu": [
-                {
-                    "name": "normal - mit Alkohol",
-                    "price": 6.00
-                },
-                {
-                    "name": "alkoholfrei",
-                    "price": 5.50
-                }
-            ]
-        },
-        {
-            "name": "Wildberry Lillet",
-            "price": 6.00
-        },
-        {
-            "name": "Sprudel 0.5l",
-            "price": 2.50
-        },
-        {
-            "name": "Cola/Fanta",
-            "price": 3.00
-        },
-        {
-            "name": "Johannesbeer-schorle",
-            "price": 3.50
-        },
-        {
-            "name": "Apfelschorle",
-            "price": 3.50
-        },
-        {
-            "name": "Topfit",
-            "price": 3.50
-        }
-    ],
-    
-    "food": [
-        {
-            "name": "Wurst-/Käseweck",
-            "price": 3.50
-        },
-        {
-            "name": "Currywurst mit Weck",
-            "price": 5.00
-        },
-        {
-            "name": "Grillwurst im Weck",
-            "price": 4.50
-        },
-        {
-            "name": "Grillwurst mit Kartoffelsalat",
-            "price": 6.50
-        },
-        {
-            "name": "Putensteak im Weck",
-            "price": 6.50
-        },
-        {
-            "name": "Putensteak mit Kartoffelsalat",
-            "price": 8.50
-        },
-        {
-            "name": "Schweinesteak im Weck",
-            "price": 6.50
-        },
-        {
-            "name": "Schweinesteak mit Kartoffelsalat",
-            "price": 8.50
-        },
-        {
-            "name": "Gemüseküchele im Weck",
-            "price": 4.50
-        },
-        {
-            "name": "Gemüseküchele mit Kartoffelsalat",
-            "price": 6.50
-        }
-    ],
-    
-    "etc": [
-        {
-            "name": "Eiskaffee/-schokolade",
-            "price": 6.00
-        },
-        {
-            "name": "Waffel mit Puderzucker",
-            "price": 2.00
-        },
-        {
-            "name": "Schleckeis",
-            "price": 1.50
-        },
-        {
-            "name": "Bolle Eis",
-            "submenu": [
-                {
-                    "name": "1 Kugel Eis OHNE Sahne",
-                    "price": 1.00
-                },
-                {
-                    "name": "1 Kugel Eis MIT Sahne",
-                    "price": 1.50
-                },
-                {
-                    "name": "2 Kugel Eis OHNE Sahne",
-                    "price": 2.00
-                },
-                {
-                    "name": "2 Kugel Eis MIT Sahne",
-                    "price": 2.50
-                },
-                {
-                    "name": "3 Kugel Eis OHNE Sahne",
-                    "price": 3.00
-                },
-                {
-                    "name": "3 Kugel Eis MIT Sahne",
-                    "price": 3.50
-                }
-            ]
-        },
-        {
-            "name": "Portion Sahne",
-            "price": 0.50
-        },
-        {
-            "name": "Einzelner Weck",
-            "price": 1.50
-        },
-        {
-            "name": "Einzelnes Steak",
-            "price": 5.00
-        },
-        {
-            "name": "Einzelne Grillwurst",
-            "price": 3.00
-        },
-        {
-            "name": "Einzelner Gemüsemockel",
-            "price": 3.00
-        }
-    ]
+    "drinks": {
+        "label": "Getränke",
+        "items": [
+            {
+                "name": "Alpi Bier - Mönch",
+                "price": 3.00
+            },
+            {
+                "name": "Alpi Radler",
+                "price": 3.00
+            },
+            {
+                "name": "Weißwein Müller Thurgau",
+                "submenu": [
+                    {
+                        "name": "Flasche 1.0l",
+                        "price": 13.00
+                    },
+                    {
+                        "name": "Glas 0.25l",
+                        "price": 3.50
+                    }
+                ]
+            },
+            {
+                "name": "Rotwein Spätburgunder",
+                "submenu": [
+                    {
+                        "name": "Flasche 1.0l",
+                        "price": 13.00
+                    },
+                    {
+                        "name": "Glas 0.25l",
+                        "price": 3.50
+                    }
+                ]
+            },
+            {
+                "name": "Weinschorle 0.25l",
+                "price": 3.00
+            },
+            {
+                "name": "Sommerschorle",
+                "submenu": [
+                    {
+                        "name": "normal - mit Alkohol",
+                        "price": 6.00
+                    },
+                    {
+                        "name": "alkoholfrei",
+                        "price": 5.50
+                    }
+                ]
+            },
+            {
+                "name": "Wildberry Lillet",
+                "price": 6.00
+            },
+            {
+                "name": "Sprudel 0.5l",
+                "price": 2.50
+            },
+            {
+                "name": "Cola/Fanta",
+                "price": 3.00
+            },
+            {
+                "name": "Johannesbeer-schorle",
+                "price": 3.50
+            },
+            {
+                "name": "Apfelschorle",
+                "price": 3.50
+            },
+            {
+                "name": "Topfit",
+                "price": 3.50
+            }
+        ]
+    },
+    "food": {
+        "label": "Essen",
+        "items": [
+            {
+                "name": "Wurst-/Käseweck",
+                "price": 3.50
+            },
+            {
+                "name": "Currywurst mit Weck",
+                "price": 5.00
+            },
+            {
+                "name": "Grillwurst im Weck",
+                "price": 4.50
+            },
+            {
+                "name": "Grillwurst mit Kartoffelsalat",
+                "price": 6.50
+            },
+            {
+                "name": "Putensteak im Weck",
+                "price": 6.50
+            },
+            {
+                "name": "Putensteak mit Kartoffelsalat",
+                "price": 8.50
+            },
+            {
+                "name": "Schweinesteak im Weck",
+                "price": 6.50
+            },
+            {
+                "name": "Schweinesteak mit Kartoffelsalat",
+                "price": 8.50
+            },
+            {
+                "name": "Gemüseküchele im Weck",
+                "price": 4.50
+            },
+            {
+                "name": "Gemüseküchele mit Kartoffelsalat",
+                "price": 6.50
+            }
+        ]
+    },
+    "desserts": {
+        "label": "Desserts",
+        "items": [
+            {
+                "name": "Eiskaffee/-schokolade",
+                "price": 6.00
+            },
+            {
+                "name": "Waffel mit Puderzucker",
+                "price": 2.00
+            },
+            {
+                "name": "Schleckeis",
+                "price": 1.50
+            },
+            {
+                "name": "Bolle Eis",
+                "submenu": [
+                    {
+                        "name": "1 Kugel Eis OHNE Sahne",
+                        "price": 1.00
+                    },
+                    {
+                        "name": "1 Kugel Eis MIT Sahne",
+                        "price": 1.50
+                    },
+                    {
+                        "name": "2 Kugel Eis OHNE Sahne",
+                        "price": 2.00
+                    },
+                    {
+                        "name": "2 Kugel Eis MIT Sahne",
+                        "price": 2.50
+                    },
+                    {
+                        "name": "3 Kugel Eis OHNE Sahne",
+                        "price": 3.00
+                    },
+                    {
+                        "name": "3 Kugel Eis MIT Sahne",
+                        "price": 3.50
+                    }
+                ]
+            },
+            {
+                "name": "Portion Sahne",
+                "price": 0.50
+            }    
+        ]
+    },
+    "etc": {
+        "label": "Extras",
+        "items": [
+            {
+                "name": "Einzelner Weck",
+                "price": 1.50
+            },
+            {
+                "name": "Einzelnes Steak",
+                "price": 5.00
+            },
+            {
+                "name": "Einzelne Grillwurst",
+                "price": 3.00
+            },
+            {
+                "name": "Einzelner Gemüsemockel",
+                "price": 3.00
+            }
+        ]
+    }
 }
