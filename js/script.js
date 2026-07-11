@@ -144,6 +144,7 @@ function createSingleProductButton(product, container) {
     }
 
     button.onclick = () => {
+        button.classList.remove('active');
         if (product.submenu) {
             showSubmenu(product.name, product.submenu);
         } else {
@@ -283,7 +284,7 @@ function renderSummary() {
         const emptyCell = document.createElement('td');
         emptyCell.colSpan = 4;
         emptyCell.className = 'summary-empty';
-        emptyCell.textContent = 'Noch keine Einträge';
+        emptyCell.textContent = 'Noch keine Artikel in der Bestellung.';
         emptyRow.appendChild(emptyCell);
         tbody.appendChild(emptyRow);
     } else {
@@ -380,6 +381,9 @@ function showTab(tabName) {
     });
     document.querySelectorAll('.tab-container button').forEach(tab => {
         tab.classList.remove('active');
+    });
+    document.querySelectorAll('.grid button.active').forEach(button => {
+        button.classList.remove('active');
     });
 
     const activeGrid = document.getElementById(`${targetTab}Grid`);

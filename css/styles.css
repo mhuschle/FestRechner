@@ -64,10 +64,15 @@ button.active {
     background-color: color-mix(in srgb, var(--accent-color) 80%, var(--accent-max));
 }
 
-button:hover,
-button:focus-visible {
-    outline: 2px solid var(--accent-strong);
-    background-color: color-mix(in srgb, var(--accent-color) 80%, var(--accent-max));
+@media (hover: hover) and (pointer: fine) {
+    button:hover {
+        outline: 2px solid var(--accent-strong);
+        background-color: color-mix(in srgb, var(--accent-color) 80%, var(--accent-max));
+    }
+
+    button:focus-visible {
+        outline: 2px solid var(--accent-strong);
+    }
 }
 
 /* ===== Gemeinsamer Shell-Aufbau ===== */
