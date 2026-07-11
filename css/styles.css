@@ -5,17 +5,22 @@
     --element-padding: 5px;
     --border-radius: 12px;
     --panel-color: #ffffff;
-    --accent-color: #509f98;
-    --accent-strong: #0a3330;
+    --accent-color: #88d17d;
+    --accent-strong: #2ba285;
     --accent-max: #000000;
+
     --text-color: #0f2323;
+
+    --button-yellow: #f9f871;
+    --button-green: var(--accent-color);
+    --button-blueish: var(--accent-strong);
 }
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0.5em;
-    background: linear-gradient(0deg, var(--panel-color) 20%, var(--accent-color) 70%);
+    background: linear-gradient(0deg, var(--panel-color) 20%, var(--accent-strong) 70%);
     box-sizing: border-box;
     text-align: center;
     overflow: hidden;
@@ -213,19 +218,90 @@ a {
     font-size: 1.2em;
 }
 
-.fixedButtons .button-red {
-    background-color: rgba(209, 40, 40, 0.5);
+.fixedButtons .button-reset {
+    background-color: var(--button-blueish);
     color: var(--text-color);
 }
 
-.fixedButtons .button-green {
-    background-color: rgba(35, 109, 35, 0.5);
+.fixedButtons .button-return {
+    background-color: var(--button-green);
     color: var(--text-color);
 }
 
-.fixedButtons .button-purple {
-    background-color: rgba(107, 44, 107, 0.5);
+.fixedButtons .button-quickaccess {
+    background-color: var(--button-yellow);
     color: var(--text-color);
+}
+
+/* ===== summary table ===== */
+.scrollableSummary {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+    padding: var(--element-padding) var(--element-padding);
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    text-align: left;
+}
+
+.summary-table th,
+.summary-table td {
+    padding: var(--element-padding) var(--element-padding);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    vertical-align: middle;
+}
+
+.summary-table th {
+    position: sticky;
+    top: 0;
+    background-color: var(--panel-color);
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.summary-name {
+    font-weight: 0;
+}
+
+.summary-count,
+.summary-total {
+    white-space: nowrap;
+}
+
+.summary-total {
+    text-align: right;
+    font-weight: 700;
+}
+
+.summary-actions {
+    width: 2.5em;
+    text-align: center;
+}
+
+.summary-remove-button {
+    width: 2.2em;
+    height: 2.2em;
+    min-height: 2.2em;
+    padding: 0;
+    border-radius: 999px;
+    font-size: 1.1em;
+    font-weight: 700;
+    line-height: 1;
+    background: rgba(209, 40, 40, 0.18);
+    color: #7b1f1f;
+}
+
+.summary-empty {
+    text-align: center;
+    color: #666;
+    padding: 1em 0;
 }
 
 /* ===== helpers and submenu ===== */

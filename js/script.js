@@ -1,12 +1,10 @@
-let total = 0;
 let order = {};
-let lastAddedItem = null;
 let activeCategory = null;
 let categories = [];
 let touchStartX = 0;
 let touchEndX = 0;
 
-updateTotal('totalSum');
+updateTotal();
 
 async function loadConfig() {
     const response = await fetch('data/config.json');
@@ -207,62 +205,124 @@ function closeSubmenu() {
 }
 
 function addItem(itemName, itemPrice, itemPfand) {
-    total += itemPrice + itemPfand;
+    const lineTotal = itemPrice + itemPfand;
 
     if (order[itemName]) {
         order[itemName].count += 1;
-        order[itemName].total += itemPrice + itemPfand;
     } else {
         order[itemName] = {
             count: 1,
-            total: itemPrice + itemPfand
+            unitPrice: lineTotal
         };
     }
-
-    lastAddedItem = { name: itemName, price: itemPrice + itemPfand };
-    updateTotal('totalSum');
+    updateTotal();
 }
 
-function removeLastItem() {
-    if (lastAddedItem && order[lastAddedItem.name]) {
-        const item = order[lastAddedItem.name];
-
-        total -= lastAddedItem.price;
-
-        if (item.count > 1) {
-            item.count -= 1;
-            item.total -= lastAddedItem.price;
-        } else {
-            delete order[lastAddedItem.name];
-        }
-
-        lastAddedItem = null;
-        updateTotal('totalSum');
-    } else {
-        alert('Es gibt keine Bestellung, die gelöscht werden kann.');
-    }
-}
-
-function updateTotal(target) {
-    const targetElement = document.getElementById(target);
-    if (!targetElement) {
+function removeItem(itemName) {
+    if (!order[itemName]) {
         return;
     }
 
-    targetElement.innerHTML = `
-    <span>Summe: </span>
-    <span style="font-weight: bold;"> ${total.toFixed(2)} €</span>
-    `;
+    const item = order[itemName];
+    if (item.count > 1) {
+        item.count -= 1;
+    } else {
+        delete order[itemName];
+    }
+    renderSummary();
+}
+
+function calculateTotal() {
+    let total = 0;
+    for (const itemName in order) {
+        const item = order[itemName];
+        total += item.unitPrice * item.count;
+    }
+    return total.toFixed(2);
+}
+
+function updateTotal() {
+    const target = ['totalSum', 'summaryTotalSum'];
+
+    target.forEach(target => {
+        targetElement = document.getElementById(target);
+        targetElement.innerHTML = `
+        <span>Summe: </span>
+        <span style="font-weight: bold;"> ${calculateTotal()} €</span>
+        `;
+    });
 }
 
 function renderSummary() {
-    let summaryHTML = '';
-    for (const item in order) {
-        summaryHTML += `${item} x ${order[item].count}: ${order[item].total.toFixed(2)} €<br>`;
+    const summaryContainer = document.getElementById('orderSummary');
+    if (!summaryContainer) {
+        return;
     }
-    summaryHTML += `<br>`;
-    document.getElementById('orderSummary').innerHTML = summaryHTML;
-    updateTotal('summaryTotalSum');
+
+    summaryContainer.innerHTML = '';
+
+    const table = document.createElement('table');
+    table.className = 'summary-table';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Artikel</th>
+            <th>Anz.</th>
+            <th>Summe</th>
+            <th></th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    const entries = Object.entries(order);
+    if (entries.length === 0) {
+        const emptyRow = document.createElement('tr');
+        const emptyCell = document.createElement('td');
+        emptyCell.colSpan = 4;
+        emptyCell.className = 'summary-empty';
+        emptyCell.textContent = 'Noch keine Einträge';
+        emptyRow.appendChild(emptyCell);
+        tbody.appendChild(emptyRow);
+    } else {
+        entries.forEach(([itemName, item]) => {
+            const row = document.createElement('tr');
+            row.className = 'summary-row';
+
+            const nameCell = document.createElement('td');
+            nameCell.className = 'summary-name';
+            nameCell.textContent = itemName;
+            row.appendChild(nameCell);
+
+            const countCell = document.createElement('td');
+            countCell.className = 'summary-count';
+            countCell.textContent = `x ${item.count}`;
+            row.appendChild(countCell);
+
+            const totalCell = document.createElement('td');
+            totalCell.className = 'summary-total';
+            totalCell.textContent = `${(item.unitPrice * item.count).toFixed(2)} €`;
+            row.appendChild(totalCell);
+
+            const actionCell = document.createElement('td');
+            actionCell.className = 'summary-actions';
+            const removeButton = document.createElement('button');
+            removeButton.className = 'summary-remove-button';
+            removeButton.type = 'button';
+            removeButton.textContent = '−';
+            removeButton.addEventListener('click', () => removeItem(itemName));
+            actionCell.appendChild(removeButton);
+            row.appendChild(actionCell);
+
+            tbody.appendChild(row);
+        });
+    }
+
+    table.appendChild(tbody);
+    summaryContainer.appendChild(table);
+    updateTotal();
 }
 
 function showPage(pageName) {
@@ -287,19 +347,16 @@ function showPage(pageName) {
     if (pageName === 'summary') {
         renderSummary();
     }
-
     closeSubmenu();
 }
 
 function showSummary() {
-    renderSummary();
     showPage('summary');
 }
 
 function clearOrder() {
-    total = 0;
     order = {};
-    updateTotal('totalSum');
+    updateTotal();
 }
 
 function backToOrder() {
