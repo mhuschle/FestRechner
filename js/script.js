@@ -1,12 +1,10 @@
-let total = 0;
 let order = {};
-let lastAddedItem = null;
 let activeCategory = null;
 let categories = [];
 let touchStartX = 0;
 let touchEndX = 0;
 
-updateTotal('totalSum');
+updateTotal();
 
 async function loadConfig() {
     const response = await fetch('data/config.json');
@@ -19,10 +17,10 @@ async function loadConfig() {
 
 loadConfig().then(settings => {
     document.getElementById('header').innerHTML = `
-    <span style="font-weight: bold; font-size: 3.5svh;">FestRechner</span>
+    <span style="font-weight: bold; font-size: 1.5em;">FestRechner</span>
     <span style="font-weight: normal;"> - ${settings.version}</span>
     `;
-    createPfandButton(settings.pfand);
+    createQuickAccessButton(settings.quickAccess);
 });
 
 async function loadProducts() {
@@ -77,7 +75,7 @@ function normalizeItem(item) {
     const hasPfand = Object.prototype.hasOwnProperty.call(item, 'pfand');
 
     const normalized = { name, price, pfand };
-    
+
     if (hasSubmenu && (hasPrice || hasPfand)) {
         console.error(`Ungültiger Eintrag: "${item.name}" darf nicht gleichzeitig submenu und price/pfand haben.`);
         return null;
@@ -155,29 +153,20 @@ function createSingleProductButton(product, container) {
     container.appendChild(button);
 }
 
-function createPfandButton(pfandList) {
-    const pfandButtonItem = document.getElementById('pfandButton');
+function createQuickAccessButton(quickAccessList) {
+    const quickAccessItem = document.getElementById('quickAccessButton');
 
-    if (!Array.isArray(pfandList)) {
-        console.warn('Pfandangabe in data/config.json ist fehlerhaft.');
-        pfandButtonItem.style.display = 'none';
+    if (!Array.isArray(quickAccessList)) {
+        console.warn('Schnellzugriffangabe in data/config.json ist fehlerhaft.');
+        quickAccessItem.style.display = 'none';
         return;
     }
 
-    if (pfandList.length === 0) {
-        pfandButtonItem.style.display = 'none';
-    } else if (pfandList.length === 1) {
-        if (parseFloat(pfandList[0].price) > 0) {
-            pfandButtonItem.innerHTML = `
-            Pfand zurück (${parseFloat(pfandList[0].price).toFixed(2)} €)
-            `;
-            pfandButtonItem.onclick = () => addItem('Pfand ' + pfandList[0].name, -parseFloat(pfandList[0].price), 0);
-        } else {
-            pfandButtonItem.style.display = 'none';
-        }
-    } else if (pfandList.length > 1) {
-        pfandButtonItem.innerText = `Pfand zurück\n(Untermenü)`;
-        pfandButtonItem.onclick = () => showSubmenu('Pfand', pfandList);
+    if (quickAccessList.length === 0) {
+        quickAccessItem.style.display = 'none';
+
+    } else if (quickAccessList.length > 1) {
+        quickAccessItem.onclick = () => showSubmenu('Schnellzugriff', quickAccessList);
     }
 }
 
@@ -191,33 +180,20 @@ function showSubmenu(name, submenuOptions) {
     const submenuTitle = document.createElement('submenu-title');
     submenuTitle.className = 'submenu-title';
 
-    if (name === 'Pfand') {
-        submenuTitle.innerText = `Pfand`;
-        submenuDiv.appendChild(submenuTitle);
-        submenuOptions.forEach(option => {
-            const submenuButton = document.createElement('button');
-            submenuButton.innerText = `${option.name} (${option.price.toFixed(2)}€)`;
-            submenuButton.onclick = () => {
-                addItem(name + ' ' + option.name, -parseFloat(option.price), 0);
-            };
-            submenuDiv.appendChild(submenuButton);
-        });
-    } else {
-        submenuTitle.innerText = `${name}`;
-        submenuDiv.appendChild(submenuTitle);
-        submenuOptions.forEach(option => {
-            const submenuButton = document.createElement('button');
-            if (option.pfand == 0.00) {
-                submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
-            } else {
-                submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
-            }
-            submenuButton.onclick = () => {
-                addItem(name + ' ' + option.name, option.price, option.pfand);
-            };
-            submenuDiv.appendChild(submenuButton);
-        });
-    }
+    submenuTitle.innerText = `${name}`;
+    submenuDiv.appendChild(submenuTitle);
+    submenuOptions.forEach(option => {
+        const submenuButton = document.createElement('button');
+        if (option.pfand == 0.00) {
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
+        } else {
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
+        }
+        submenuButton.onclick = () => {
+            addItem(name + ' ' + option.name, option.price, option.pfand);
+        };
+        submenuDiv.appendChild(submenuButton);
+    });
     document.body.appendChild(submenuDiv);
     overlay.style.display = 'block';
 }
@@ -229,77 +205,166 @@ function closeSubmenu() {
 }
 
 function addItem(itemName, itemPrice, itemPfand) {
-    total += itemPrice + itemPfand;
+    const lineTotal = itemPrice + itemPfand;
 
     if (order[itemName]) {
         order[itemName].count += 1;
-        order[itemName].total += itemPrice + itemPfand;
     } else {
         order[itemName] = {
             count: 1,
-            total: itemPrice + itemPfand
+            unitPrice: lineTotal
         };
     }
-
-    lastAddedItem = { name: itemName, price: itemPrice + itemPfand };
-    updateTotal('totalSum');
+    updateTotal();
 }
 
-function removeLastItem() {
-    if (lastAddedItem && order[lastAddedItem.name]) {
-        const item = order[lastAddedItem.name];
-
-        total -= lastAddedItem.price;
-
-        if (item.count > 1) {
-            item.count -= 1;
-            item.total -= lastAddedItem.price;
-        } else {
-            delete order[lastAddedItem.name];
-        }
-
-        lastAddedItem = null;
-        updateTotal('totalSum');
-    } else {
-        alert('Es gibt keine Bestellung, die gelöscht werden kann.');
+function removeItem(itemName) {
+    if (!order[itemName]) {
+        return;
     }
+
+    const item = order[itemName];
+    if (item.count > 1) {
+        item.count -= 1;
+    } else {
+        delete order[itemName];
+    }
+    renderSummary();
 }
 
-function updateTotal(target) {
-    document.getElementById(target).innerHTML = `
-    <span>Betrag : </span>
-    <span class="highlight" style="font-weight: bold;"> ${total.toFixed(2)} €</span>
+function calculateTotal() {
+    let total = 0;
+    for (const itemName in order) {
+        const item = order[itemName];
+        total += item.unitPrice * item.count;
+    }
+    return total.toFixed(2);
+}
+
+function updateTotal() {
+    const target = ['totalSum', 'summaryTotalSum'];
+
+    target.forEach(target => {
+        targetElement = document.getElementById(target);
+        targetElement.innerHTML = `
+        <span>Summe: </span>
+        <span style="font-weight: bold;"> ${calculateTotal()} €</span>
+        `;
+    });
+}
+
+function renderSummary() {
+    const summaryContainer = document.getElementById('orderSummary');
+    if (!summaryContainer) {
+        return;
+    }
+
+    summaryContainer.innerHTML = '';
+
+    const table = document.createElement('table');
+    table.className = 'summary-table';
+
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Artikel</th>
+            <th>Anz.</th>
+            <th>Summe</th>
+            <th></th>
+        </tr>
     `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    const entries = Object.entries(order);
+    if (entries.length === 0) {
+        const emptyRow = document.createElement('tr');
+        const emptyCell = document.createElement('td');
+        emptyCell.colSpan = 4;
+        emptyCell.className = 'summary-empty';
+        emptyCell.textContent = 'Noch keine Einträge';
+        emptyRow.appendChild(emptyCell);
+        tbody.appendChild(emptyRow);
+    } else {
+        entries.forEach(([itemName, item]) => {
+            const row = document.createElement('tr');
+            row.className = 'summary-row';
+
+            const nameCell = document.createElement('td');
+            nameCell.className = 'summary-name';
+            nameCell.textContent = itemName;
+            row.appendChild(nameCell);
+
+            const countCell = document.createElement('td');
+            countCell.className = 'summary-count';
+            countCell.textContent = `x ${item.count}`;
+            row.appendChild(countCell);
+
+            const totalCell = document.createElement('td');
+            totalCell.className = 'summary-total';
+            totalCell.textContent = `${(item.unitPrice * item.count).toFixed(2)} €`;
+            row.appendChild(totalCell);
+
+            const actionCell = document.createElement('td');
+            actionCell.className = 'summary-actions';
+            const removeButton = document.createElement('button');
+            removeButton.className = 'summary-remove-button';
+            removeButton.type = 'button';
+            removeButton.textContent = '−';
+            removeButton.addEventListener('click', () => removeItem(itemName));
+            actionCell.appendChild(removeButton);
+            row.appendChild(actionCell);
+
+            tbody.appendChild(row);
+        });
+    }
+
+    table.appendChild(tbody);
+    summaryContainer.appendChild(table);
+    updateTotal();
+}
+
+function showPage(pageName) {
+    ['main', 'summary', 'help'].forEach(key => {
+        const page = document.getElementById(`${key}Page`);
+        if (!page) {
+            return;
+        }
+        const shouldShow = key === pageName;
+        page.classList.toggle('is-active', shouldShow);
+        page.classList.toggle('hidden', !shouldShow);
+    });
+
+    ['main', 'summary', 'help'].forEach(key => {
+        const footerGroup = document.getElementById(`${key}Buttons`);
+        if (!footerGroup) {
+            return;
+        }
+        footerGroup.classList.toggle('hidden', key !== pageName);
+    });
+
+    if (pageName === 'summary') {
+        renderSummary();
+    }
+    closeSubmenu();
 }
 
 function showSummary() {
-    document.getElementById('mainPage').classList.add('hidden');
-    document.getElementById('summaryPage').classList.remove('hidden');
-    document.getElementById('mainButtons').classList.add('hidden');
-    document.getElementById('summaryButtons').classList.remove('hidden');
-
-    let summaryHTML = '';
-    for (const item in order) {
-        summaryHTML += `${item} x ${order[item].count}: ${order[item].total.toFixed(2)} €<br>`;
-    }
-    summaryHTML += `<br>`;
-    document.getElementById('orderSummary').innerHTML = summaryHTML;
-    updateTotal('summaryTotalSum');
+    showPage('summary');
 }
 
 function clearOrder() {
-    total = 0;
     order = {};
-    updateTotal('totalSum');
+    updateTotal();
 }
 
 function backToOrder() {
-    document.getElementById('summaryPage').classList.add('hidden');
-    document.getElementById('summaryButtons').classList.add('hidden');
-    document.getElementById('mainPage').classList.remove('hidden');
-    document.getElementById('mainButtons').classList.remove('hidden');
-    document.getElementById('mainPage').scrollIntoView({ behavior: 'smooth' });
-    closeSubmenu();
+    showPage('main');
+    const mainPage = document.getElementById('mainPage');
+    if (mainPage) {
+        mainPage.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 function resetOrder() {
@@ -313,7 +378,7 @@ function showTab(tabName) {
     document.querySelectorAll('.grid').forEach(grid => {
         grid.classList.add('hidden');
     });
-    document.querySelectorAll('.tabContainer button').forEach(tab => {
+    document.querySelectorAll('.tab-container button').forEach(tab => {
         tab.classList.remove('active');
     });
 
@@ -384,4 +449,5 @@ function handleSwipeGesture() {
     }
 }
 
+showPage('main');
 createProductButtons();
