@@ -124,8 +124,8 @@
             }
         ]
     },
-    "etc": {
-        "label": "Extras",
+    "desserts": {
+        "label": "Desserts",
         "items": [
             {
                 "name": "Eiskaffee/-schokolade",
@@ -171,7 +171,12 @@
             {
                 "name": "Portion Sahne",
                 "price": 0.50
-            },
+            }    
+        ]
+    },
+    "etc": {
+        "label": "Extras",
+        "items": [
             {
                 "name": "Einzelner Weck",
                 "price": 1.50
@@ -187,57 +192,6 @@
             {
                 "name": "Einzelner Gemüsemockel",
                 "price": 3.00
-            }
-        ]
-    },
-    "test": {
-        "label": "Test0",
-        "items": [
-            {
-                "name": "Test Item 0",
-                "price": 0.00,
-                "pfand": 2.00
-            }
-        ]
-    },
-    "test1": {
-        "label": "Test1",
-        "items": [
-            {
-                "name": "Test Item 1",
-                "price": 1.00,
-                "pfand": 2.00
-            }
-        ]
-    },
-    "test2": {
-        "label": "Test2",
-        "items": [
-            {
-                "name": "Test Item 2",
-                "submenu": [
-                    {
-                        "name": "Test Item 2.1",
-                        "price": 2.50,
-                        "pfand": 2.00
-                    },
-                    {
-                        "name": "Test Item 2.2",
-                        "pfand": 2.00,
-                        "submenu": [
-                            {
-                                "name": "Test Item 2.2.1",
-                                "price": 3.00,
-                                "pfand": 2.00
-                            },
-                            {
-                                "name": "Test Item 2.2.2",
-                                "price": 3.50,
-                                "pfand": 2.00
-                            }
-                        ]
-                    }
-                ]
             }
         ]
     }
