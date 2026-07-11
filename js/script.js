@@ -144,7 +144,11 @@ function createSingleProductButton(product, container) {
     }
 
     button.onclick = () => {
-        button.classList.remove('active');
+        button.classList.add('active');
+        setTimeout(() => {
+            button.classList.remove('active');
+        }, 50);
+        // button.classList.remove('active');
         if (product.submenu) {
             showSubmenu(product.name, product.submenu);
         } else {
