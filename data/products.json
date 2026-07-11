@@ -42,12 +42,12 @@
             "name": "Sommerschorle",
             "submenu": [
                 {
-                    "name": "mit alk",
-                    "price": 5.50
+                    "name": "normal - mit Alkohol",
+                    "price": 6.00
                 },
                 {
                     "name": "alkoholfrei",
-                    "price": 6.00
+                    "price": 5.50
                 }
             ]
         },
