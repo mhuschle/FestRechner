@@ -33,72 +33,72 @@
                 <div class="page-pane">
                     <div class="tab-container" id="tabContainer"></div>
                     <div class="product-grid-container" id="productGridContainer"></div>
-</div>
-        <div class="totalField" id="totalSum"></div>
-                </section>
+                </div>
+                <div class="totalField" id="totalSum"></div>
+            </section>
 
             <section class="page hidden" id="summaryPage" data-page="summary">
                 <div class="page-pane">
                     <h1>Zusammenfassung</h1>
-        <div class="scrollableSummary" id="orderSummary"></div>
-</div>
-        <div class="totalField" id="summaryTotalSum"></div>
-                </section>
+                    <div class="scrollableSummary" id="orderSummary"></div>
+                </div>
+                <div class="totalField" id="summaryTotalSum"></div>
+            </section>
 
             <section class="page hidden" id="helpPage" data-page="help">
                 <div class="page-pane">
-<div class="text-container">
-                    <h1>Hilfeseite</h1>
-                    <h2>Artikelseite</h2>
-                    <p>
-                        Wähle auf der Artikelseite deine Artikel.<br>
-                        Oben steht der addierte Betrag.<br>
-                        Darunter die Tabbutton, mit denen zwischen den Artikelkategorien gewechselt werden kann.<br>
-                        Durch Drücken auf die einzelnen Artikel werden diese dem Betrag und der Liste hinzugefügt.
-                        Die eingegebenen Artikel können auf der Zusammenfassungsseite eingesehen werden.
-                    </p>
-                    <p>
-                        Artikel mit dem Zusatz (Untermenü) haben mehrere Optionen,
-                        zwischen denen gewählt werden kann.<br>
-                        Wenn Artikel einen Preis wie (3.50€ + 2.00€) tragen,
-                        dann haben sie zum Artikelpreis außerdem einen Pfandbetrag.
-                    </p>
-                    <p>
-                        Die farbigen Buttons unten bieten die Möglichkeit Pfandrückgabe zu berechnen,
-                        den letzten hinzugefügten Artikel wieder löschen
-                        und zuletzt kann mit dem grünen Button die Zusammenfassungsseite aufgerufen werden.
-                    </p>
-                    <h2>Zusammenfassungs<wbr>seite</h2>
-                    <p>
-                        Sieh dir auf der Zusammenfassungsseite deine eingegebenen Artikel an.
-                        Auf der Seite zu sehen ist eine Liste aller Artikel.
-                        Hinter jedem Artikel steht auch die Summe für jeden einzelnen Artikel.
-                        Und ganz unten steht dann der gesamte Betrag.
-                    </p>
-                    <p>
-                        Die Buttons unten führen zurück zur Artikelseite.
-                        Bestellung zurücksetzen löscht alle ausgewählten Artikel aus der Liste
-                        und versetzt diese in den leeren Zustand zurück.
-                    </p>
-</div>
+                    <div class="text-container">
+                        <h1>Hilfeseite</h1>
+                        <h2>Artikelseite</h2>
+                        <p>
+                            Wähle auf der Artikelseite deine Artikel.<br>
+                            Oben steht der addierte Betrag.<br>
+                            Darunter die Tabbutton, mit denen zwischen den Artikelkategorien gewechselt werden kann.<br>
+                            Durch Drücken auf die einzelnen Artikel werden diese dem Betrag und der Liste hinzugefügt.
+                            Die eingegebenen Artikel können auf der Zusammenfassungsseite eingesehen werden.
+                        </p>
+                        <p>
+                            Artikel mit dem Zusatz (Untermenü) haben mehrere Optionen,
+                            zwischen denen gewählt werden kann.<br>
+                            Wenn Artikel einen Preis wie (3.50€ + 2.00€) tragen,
+                            dann haben sie zum Artikelpreis außerdem einen Pfandbetrag.
+                        </p>
+                        <p>
+                            Die farbigen Buttons unten bieten die Möglichkeit Pfandrückgabe zu berechnen,
+                            den letzten hinzugefügten Artikel wieder löschen
+                            und zuletzt kann mit dem grünen Button die Zusammenfassungsseite aufgerufen werden.
+                        </p>
+                        <h2>Zusammenfassungs<wbr>seite</h2>
+                        <p>
+                            Sieh dir auf der Zusammenfassungsseite deine eingegebenen Artikel an.
+                            Auf der Seite zu sehen ist eine Liste aller Artikel.
+                            Hinter jedem Artikel steht auch die Summe für jeden einzelnen Artikel.
+                            Und ganz unten steht dann der gesamte Betrag.
+                        </p>
+                        <p>
+                            Die Buttons unten führen zurück zur Artikelseite.
+                            Bestellung zurücksetzen löscht alle ausgewählten Artikel aus der Liste
+                            und versetzt diese in den leeren Zustand zurück.
+                        </p>
+                    </div>
                 </div>
             </section>
         </main>
 
         <footer class="app-footer">
-    <div class="fixedButtons" id="mainButtons">
-            <button class="button-purple" id="quickAccessButton">Schnell<wbr>zugriff</button>
-        <button class="button-green" id="summaryButton" onclick="showSummary()">Zusammen<wbr>fassung</button>
-    </div>
+            <div class="fixedButtons" id="mainButtons">
+                <button class="button-purple" id="quickAccessButton">Schnell<wbr>zugriff</button>
+                <button class="button-green" id="summaryButton" onclick="showSummary()">Zusammen<wbr>fassung</button>
+            </div>
 
-    <div class="fixedButtons hidden" id="summaryButtons">
-            <button class="button-red" onclick="resetOrder()">Bestellung zurück<wbr>setzen</button>
+            <div class="fixedButtons hidden" id="summaryButtons">
+                <button class="button-red" onclick="resetOrder()">Bestellung zurück<wbr>setzen</button>
                 <button class="button-green" onclick="backToOrder()">Zurück zur Bestellung</button>
             </div>
 
             <div class="fixedButtons hidden" id="helpButtons">
-                                    <button class="button-green" onclick="showPage('main')">Zurück</button>
-                            </div>
+                <button class="button-green" onclick="showPage('main')">Zurück</button>
+            </div>
         </footer>
     </div>
 </body>

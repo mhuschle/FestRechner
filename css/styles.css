@@ -6,16 +6,15 @@
     --panel-color: #ffffff;
     --accent-color: #509f98;
     --accent-strong: #0a3330;
---accent-max: #000000;
+    --accent-max: #000000;
     --text-color: #0f2323;
 }
 
 body {
     font-family: Arial, sans-serif;
-        margin: 0;
+    margin: 0;
     padding: 0.5em;
     background: linear-gradient(0deg, var(--panel-color) 20%, var(--accent-color) 70%);
-;
     box-sizing: border-box;
     text-align: center;
     overflow: hidden;
@@ -33,8 +32,9 @@ h1, h2 {
 button {
     border: 1px solid var(--accent-max);
     border-radius: 12px;
-    font-weight: 800;
-        white-space: normal;
+    font-weight: 600;
+    font-size: 1.05em;
+    white-space: normal;
     word-wrap: break-word;
     overflow-wrap: anywhere;
     hyphens: auto;
@@ -42,8 +42,8 @@ button {
     cursor: pointer;
     width: 100%;
     padding: var(--element-padding);
-gap: var(--element-padding);
-        display: inline-flex;
+    gap: var(--element-padding);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -3px 6px rgba(0, 0, 0, 0.08);
@@ -61,15 +61,15 @@ button:active {
 button:hover,
 button:focus-visible {
     outline: 2px solid var(--accent-strong);
-background-color: color-mix(in srgb, var(--accent-color) 80%, var(--accent-max));
+    background-color: color-mix(in srgb, var(--accent-color) 80%, var(--accent-max));
 }
 
 /* ===== Gemeinsamer Shell-Aufbau ===== */
 .app-shell {
-display: flex;
+    display: flex;
     flex: 1;
     min-height: 0;
-        flex-direction: column;
+    flex-direction: column;
     gap: 2px;
 }
 .app-header {
@@ -77,27 +77,27 @@ display: flex;
     vertical-align: middle;
     justify-content: center;
     height: var(--header-height);
-    }
+}
 
 .app-main {
-display: flex;
+    display: flex;
     flex: 1 1 auto;
     min-height: 0;
-        flex-direction: column;
+    flex-direction: column;
 }
 
 .app-footer {
-display: flex;
+    display: flex;
     flex: 0 0 auto;
-        height: var(--footer-height);
-            }
+    height: var(--footer-height);
+}
 
-/* ===== header content ===== */
+/* ===== header link content ===== */
 a {
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
-    }
+}
 
 /* ===== main content ===== */
 .page {
@@ -105,7 +105,7 @@ a {
     flex: 1;
     min-height: 0;
     padding: var(--element-padding);
-    }
+}
 
 .page.is-active {
     display: flex;
@@ -113,16 +113,16 @@ a {
 }
 
 .page-pane {
-display: flex;
+    display: flex;
     flex: 1;
-box-sizing: border-box;
+    box-sizing: border-box;
     min-height: 0;
-width: 100%;
+    width: 100%;
     padding: var(--element-padding);
     border-radius: 12px;
     background-color: var(--panel-color);
     box-shadow: 0 0 15px var(--accent-max);
-                    flex-direction: column;
+    flex-direction: column;
     overflow: hidden;
 }
 
@@ -132,7 +132,7 @@ width: 100%;
     flex: 0 0 auto;
     min-height: 8%;
     margin-bottom: 5px;
-        overflow-x: auto;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
@@ -140,29 +140,53 @@ width: 100%;
 
 .tab-container button {
     flex: 1 1 auto;
-    min-width: 100px;
+    min-width: max-content;
     margin: 0 2px;
 }
 
 .product-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: flex;
     flex: 1 1 auto;
     min-height: 0;
+    overflow: hidden;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-auto-rows: minmax(max-content, auto);
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
     overflow-y: auto;
+    overflow-x: none;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
+    align-content: start;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+.grid button {
+    width: 98%;
+    min-height: max-content;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0.5em 0.2em;
+    color: var(--text-color);
+    justify-content: space-evenly;
 }
 
 .totalField {
-display: flex;
+    display: flex;
     flex: 0 0 auto;
-box-sizing: border-box;
+    box-sizing: border-box;
     font-size: 1.7em;
     margin: 0.5em 0.2em;
     color: var(--text-color);
-        justify-content: space-evenly;
+    justify-content: space-evenly;
 }
 
 .text-container {
@@ -178,15 +202,15 @@ box-sizing: border-box;
 /* ===== footer content ===== */
 .fixedButtons {
     display: flex;
-        align-items: center;
+    align-items: center;
     gap: var(--element-padding);
     width: 100%;
 }
 
 .fixedButtons button {
     flex: 1;
-height: 100%;
-font-size: 1.2em;
+    height: 100%;
+    font-size: 1.2em;
 }
 
 .fixedButtons .button-red {

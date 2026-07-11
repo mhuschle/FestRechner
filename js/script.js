@@ -77,7 +77,7 @@ function normalizeItem(item) {
     const hasPfand = Object.prototype.hasOwnProperty.call(item, 'pfand');
 
     const normalized = { name, price, pfand };
-    
+
     if (hasSubmenu && (hasPrice || hasPfand)) {
         console.error(`Ungültiger Eintrag: "${item.name}" darf nicht gleichzeitig submenu und price/pfand haben.`);
         return null;
@@ -168,7 +168,7 @@ function createQuickAccessButton(quickAccessList) {
         quickAccessItem.style.display = 'none';
 
     } else if (quickAccessList.length > 1) {
-                quickAccessItem.onclick = () => showSubmenu('Schnellzugriff', quickAccessList);
+        quickAccessItem.onclick = () => showSubmenu('Schnellzugriff', quickAccessList);
     }
 }
 
@@ -182,21 +182,21 @@ function showSubmenu(name, submenuOptions) {
     const submenuTitle = document.createElement('submenu-title');
     submenuTitle.className = 'submenu-title';
 
-        submenuTitle.innerText = `${name}`;
-        submenuDiv.appendChild(submenuTitle);
-        submenuOptions.forEach(option => {
-            const submenuButton = document.createElement('button');
-            if (option.pfand == 0.00) {
-                submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
-            } else {
-                submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
-            }
-            submenuButton.onclick = () => {
-                addItem(name + ' ' + option.name, option.price, option.pfand);
-            };
-            submenuDiv.appendChild(submenuButton);
-        });
-        document.body.appendChild(submenuDiv);
+    submenuTitle.innerText = `${name}`;
+    submenuDiv.appendChild(submenuTitle);
+    submenuOptions.forEach(option => {
+        const submenuButton = document.createElement('button');
+        if (option.pfand == 0.00) {
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} €)`;
+        } else {
+            submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
+        }
+        submenuButton.onclick = () => {
+            addItem(name + ' ' + option.name, option.price, option.pfand);
+        };
+        submenuDiv.appendChild(submenuButton);
+    });
+    document.body.appendChild(submenuDiv);
     overlay.style.display = 'block';
 }
 
