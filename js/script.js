@@ -3,6 +3,7 @@ let activeCategory = null;
 let categories = [];
 let touchStartX = 0;
 let touchEndX = 0;
+let buttonClickTime = 50;
 
 updateTotal();
 
@@ -147,7 +148,7 @@ function createSingleProductButton(product, container) {
         button.classList.add('active');
         setTimeout(() => {
             button.classList.remove('active');
-        }, 25);
+        }, buttonClickTime);
         if (product.submenu) {
             showSubmenu(product.name, product.submenu);
         } else {
@@ -197,7 +198,7 @@ function showSubmenu(name, submenuOptions) {
             submenuButton.classList.add('active');
             setTimeout(() => {
                 submenuButton.classList.remove('active');
-            }, 25);
+            }, buttonClickTime);
             addItem(name + ' ' + option.name, option.price, option.pfand);
         };
         submenuDiv.appendChild(submenuButton);
@@ -324,7 +325,7 @@ function renderSummary() {
             removeButton.classList.add('active');
             setTimeout(() => {
                 removeButton.classList.remove('active');
-            }, 25);
+            }, buttonClickTime);
             actionCell.appendChild(removeButton);
             row.appendChild(actionCell);
 
