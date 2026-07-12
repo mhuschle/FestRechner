@@ -88,14 +88,13 @@ function normalizeItem(item) {
     return normalized;
 }
 
-function flashButton(button) {
+async function flashButton(button) {
     if (!button) {
         return;
     }
     button.classList.add('active');
-    window.setTimeout(() => {
-        button.classList.remove('active');
-    }, 50);
+    await new Promise(resolve => setTimeout(resolve, 50));
+    button.classList.remove('active');
 }
 
 function createProductButtons() {
@@ -230,7 +229,7 @@ function addItem(itemName, itemPrice, itemPfand) {
     updateTotal();
 }
 
-function removeItem(itemName) {
+function removeItem(itemName, flashTarget = null) {
     if (!order[itemName]) {
         return;
     }
@@ -241,7 +240,14 @@ function removeItem(itemName) {
     } else {
         delete order[itemName];
     }
-    renderSummary();
+
+    if (flashTarget) {
+        flashButton(flashTarget);
+    }
+
+    window.setTimeout(() => {
+        renderSummary();
+    }, 50);
 }
 
 function calculateTotal() {
@@ -325,10 +331,7 @@ function renderSummary() {
             removeButton.type = 'button';
             removeButton.textContent = '−';
             removeButton.addEventListener('click', () => {
-                flashButton(removeButton);
-                delay(1).then(() => {
-                    removeItem(itemName);
-                });
+                removeItem(itemName, removeButton);
             });
             actionCell.appendChild(removeButton);
             row.appendChild(actionCell);
