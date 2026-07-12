@@ -147,8 +147,7 @@ function createSingleProductButton(product, container) {
         button.classList.add('active');
         setTimeout(() => {
             button.classList.remove('active');
-        }, 50);
-        // button.classList.remove('active');
+        }, 25);
         if (product.submenu) {
             showSubmenu(product.name, product.submenu);
         } else {
@@ -195,6 +194,10 @@ function showSubmenu(name, submenuOptions) {
             submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
         }
         submenuButton.onclick = () => {
+            submenuButton.classList.add('active');
+            setTimeout(() => {
+                submenuButton.classList.remove('active');
+            }, 25);
             addItem(name + ' ' + option.name, option.price, option.pfand);
         };
         submenuDiv.appendChild(submenuButton);
@@ -318,6 +321,10 @@ function renderSummary() {
             removeButton.type = 'button';
             removeButton.textContent = '−';
             removeButton.addEventListener('click', () => removeItem(itemName));
+            removeButton.classList.add('active');
+            setTimeout(() => {
+                removeButton.classList.remove('active');
+            }, 25);
             actionCell.appendChild(removeButton);
             row.appendChild(actionCell);
 
