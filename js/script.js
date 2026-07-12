@@ -3,7 +3,6 @@ let activeCategory = null;
 let categories = [];
 let touchStartX = 0;
 let touchEndX = 0;
-let buttonClickTime = 50;
 
 updateTotal();
 
@@ -89,6 +88,16 @@ function normalizeItem(item) {
     return normalized;
 }
 
+function flashButton(button) {
+    if (!button) {
+        return;
+    }
+    button.classList.add('active');
+    window.setTimeout(() => {
+        button.classList.remove('active');
+    }, 50);
+}
+
 function createProductButtons() {
     loadProducts()
         .then(products => {
@@ -145,10 +154,7 @@ function createSingleProductButton(product, container) {
     }
 
     button.onclick = () => {
-        button.classList.add('active');
-        setTimeout(() => {
-            button.classList.remove('active');
-        }, buttonClickTime);
+        flashButton(button);
         if (product.submenu) {
             showSubmenu(product.name, product.submenu);
         } else {
@@ -195,10 +201,7 @@ function showSubmenu(name, submenuOptions) {
             submenuButton.innerText = `${option.name}\n(${option.price.toFixed(2)} + ${option.pfand.toFixed(2)} €)`;
         }
         submenuButton.onclick = () => {
-            submenuButton.classList.add('active');
-            setTimeout(() => {
-                submenuButton.classList.remove('active');
-            }, buttonClickTime);
+            flashButton(submenuButton);
             addItem(name + ' ' + option.name, option.price, option.pfand);
         };
         submenuDiv.appendChild(submenuButton);
@@ -321,11 +324,12 @@ function renderSummary() {
             removeButton.className = 'summary-remove-button';
             removeButton.type = 'button';
             removeButton.textContent = '−';
-            removeButton.addEventListener('click', () => removeItem(itemName));
-            removeButton.classList.add('active');
-            setTimeout(() => {
-                removeButton.classList.remove('active');
-            }, buttonClickTime);
+            removeButton.addEventListener('click', () => {
+                flashButton(removeButton);
+                delay(1).then(() => {
+                    removeItem(itemName);
+                });
+            });
             actionCell.appendChild(removeButton);
             row.appendChild(actionCell);
 
